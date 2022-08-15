@@ -7,8 +7,8 @@ import com.epam.elearn.command.impl.get.SignUpPageCommand;
 public enum CommandEnum {
 
     HOME_PAGE(new HomePageCommand()),
-    ERROR_PAGE(new ErrorPageCommand()),
-    SIGN_UP_PAGE(new SignUpPageCommand());
+    SIGN_UP_PAGE(new SignUpPageCommand()),
+    ERROR_PAGE(new ErrorPageCommand());
 
     private final ICommand command;
 
