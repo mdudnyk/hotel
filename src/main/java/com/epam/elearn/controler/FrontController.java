@@ -1,6 +1,6 @@
 package com.epam.elearn.controler;
 
-import com.epam.elearn.command.ICommand;
+import com.epam.elearn.command.Command;
 import com.epam.elearn.command.factory.CommandFactory;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -17,13 +17,13 @@ public class FrontController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String redirect = handleRequest(request, response);
         response.sendRedirect(redirect);
     }
 
-    private String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        ICommand command = CommandFactory.getCommand(request);
-        return command.execute(request, response);
+    private String handleRequest(HttpServletRequest req, HttpServletResponse resp) {
+        Command command = CommandFactory.getCommand(req);
+        return command.execute(req, resp);
     }
 }

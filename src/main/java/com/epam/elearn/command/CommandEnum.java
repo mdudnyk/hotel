@@ -10,13 +10,13 @@ public enum CommandEnum {
     SIGN_UP_PAGE(new SignUpPageCommand()),
     ERROR_PAGE(new ErrorPageCommand());
 
-    private final ICommand command;
+    private final Command command;
 
-    CommandEnum(ICommand command) {
+    CommandEnum(Command command) {
         this.command = command;
     }
 
-    public ICommand getCommand() {
+    public Command getCommand() {
         return command;
     }
 }
