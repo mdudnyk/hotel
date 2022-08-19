@@ -1,6 +1,6 @@
 package com.epam.elearn.dao;
 
-import com.epam.elearn.dao.impl.mysql.FactoryDaoMySQL;
+import com.epam.elearn.dao.mysql.FactoryDaoMySQL;
 
 public interface FactoryDao {
 

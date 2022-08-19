@@ -1,4 +1,4 @@
-package com.epam.elearn.dao.impl.mysql;
+package com.epam.elearn.dao.mysql;
 
 import com.epam.elearn.dao.FactoryDao;
 import com.epam.elearn.dao.RoomCategoryDao;

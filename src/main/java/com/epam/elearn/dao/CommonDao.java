@@ -12,6 +12,6 @@ public interface CommonDao<E, K> {
 
     void update(E entity) throws DBException;
 
-    void delete(E id) throws DBException;
+    void delete(K id) throws DBException;
 
 }
