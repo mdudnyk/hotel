@@ -30,8 +30,10 @@
         <TH>GUESTS</TH>
         <TH>DESCRIPTION</TH>
     </TR>
-    <%if (list != null) {
-            for (RoomCategory rc : list) {%>
+    <%
+        if (list != null) {
+            for (RoomCategory rc : list) {
+    %>
     <TR>
         <TD><%= rc.id() %>
         </td>
@@ -46,7 +48,10 @@
         <TD><%= rc.description() %>
         </td>
     </TR>
-    <%}}%>
+    <%
+            }
+        }
+    %>
 </TABLE>
 </BODY>
 </HTML>

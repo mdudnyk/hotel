@@ -6,17 +6,17 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public final class CommandFactory {
 
-    private CommandFactory() {}
+    private CommandFactory() {
+    }
 
     public static Command getCommand(HttpServletRequest request) {
         String commandFromRequest = request.getParameter("command");
-        Command command = null;
+        Command command;
 
         if (commandFromRequest != null) {
             try {
                 command = CommandEnum.valueOf(commandFromRequest).getCommand();
-            }
-            catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 e.printStackTrace();
                 command = CommandEnum.ERROR_PAGE.getCommand();
             }

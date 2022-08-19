@@ -6,8 +6,10 @@ import com.epam.elearn.dao.mysql.FactoryDaoMySQL;
 public abstract class ServiceFactory {
     public static FactoryDao getServiceFactory(String source) {
         switch (source) {
-            case "MYSQL": return FactoryDaoMySQL.getInstance();
-            default: throw new IllegalArgumentException();
+            case "MYSQL":
+                return FactoryDaoMySQL.getInstance();
+            default:
+                throw new IllegalArgumentException();
         }
     }
 

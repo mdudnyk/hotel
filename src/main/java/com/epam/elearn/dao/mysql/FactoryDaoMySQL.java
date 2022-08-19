@@ -6,7 +6,8 @@ import com.epam.elearn.dao.RoomCategoryDao;
 public class FactoryDaoMySQL implements FactoryDao {
     private static FactoryDaoMySQL instance;
 
-    private FactoryDaoMySQL() {}
+    private FactoryDaoMySQL() {
+    }
 
     public static FactoryDaoMySQL getInstance() {
         if (instance == null) {
