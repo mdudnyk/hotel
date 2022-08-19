@@ -1,7 +1,7 @@
 package com.epam.elearn.service;
 
 import com.epam.elearn.dao.FactoryDao;
-import com.epam.elearn.dao.mysql.FactoryDaoMySQL;
+import com.epam.elearn.dao.impl.mysql.FactoryDaoMySQL;
 
 public abstract class ServiceFactory {
     public static FactoryDao getServiceFactory(String source) {

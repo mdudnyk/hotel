@@ -15,6 +15,9 @@ public class HomePageCommand implements Command {
         RoomCategoryDao rcDao = dao.getRoomCategoryDao();
         RoomCategory rc = new RoomCategory(1, "Triple Room", 100, 20, 3, "Best room");
         rcDao.create(rc);
+        rc = new RoomCategory(1, "Triplaaa Room", 100, 20, 3, "Best room");
+        rcDao.create(rc);
+        rcDao.getAll().forEach(System.out::println);
         return "HomePage";
     }
 }

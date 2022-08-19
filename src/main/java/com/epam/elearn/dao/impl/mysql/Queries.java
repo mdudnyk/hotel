@@ -1,4 +1,4 @@
-package com.epam.elearn.dao.mysql;
+package com.epam.elearn.dao.impl.mysql;
 
 public class Queries {
 
