@@ -21,10 +21,10 @@ public class HomePageCommand implements Command {
         rcDao.create(rc2);
 
         RoomCategory rc3 = new RoomCategory(1, "Triple Room", 200, 30, 3, "room for three person");
-        rcDao.create(rc2);
+        rcDao.create(rc3);
 
         rcDao.getAll().forEach(System.out::println);
 
-        return "HomePage";
+        return "index";
     }
 }
