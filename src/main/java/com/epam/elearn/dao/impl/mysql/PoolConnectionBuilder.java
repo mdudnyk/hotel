@@ -5,15 +5,25 @@ import com.epam.elearn.dao.DBException;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class PoolConnectionBuilder implements ConnectionBuilder {
     private static HikariDataSource dataSource;
 
-    public PoolConnectionBuilder()  {
+    public PoolConnectionBuilder() {
         if (dataSource == null) {
-            HikariConfig config = new HikariConfig("C:\\Users\\mdudnyk\\Desktop\\hotel\\src\\main\\resources\\hikari.properties");
+            String propertiesFilename = "hikari.properties";
+            URL url = this.getClass()
+                    .getClassLoader()
+                    .getResource(propertiesFilename);
+
+            if (url == null) {
+                throw new IllegalArgumentException(propertiesFilename + " is not found");
+            }
+
+            HikariConfig config = new HikariConfig(url.getPath());
             dataSource = new HikariDataSource(config);
         }
     }
@@ -24,7 +34,7 @@ public class PoolConnectionBuilder implements ConnectionBuilder {
         try {
             connection = dataSource.getConnection();
         } catch (SQLException e) {
-            throw new DBException("Can not can connection from hikari connection pool: ", e.getMessage());
+            throw new DBException("Can not get connection from hikari connection pool: ", e.getMessage());
         }
         return connection;
     }
