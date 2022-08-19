@@ -1,6 +1,5 @@
 package com.epam.elearn.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface CommonDao<E, K> {
@@ -9,10 +8,10 @@ public interface CommonDao<E, K> {
 
     List<E> getAll() throws DBException;
 
-    E getEntityById(K id);
+    E getEntityById(K id) throws DBException;
 
-    void update(E entity);
+    void update(E entity) throws DBException;
 
-    void delete(E id);
+    void delete(E id) throws DBException;
 
 }

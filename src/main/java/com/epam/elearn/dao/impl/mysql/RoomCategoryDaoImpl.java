@@ -1,26 +1,26 @@
 package com.epam.elearn.dao.impl.mysql;
 
+import com.epam.elearn.dao.HikariPooledConnectionBuilder;
 import com.epam.elearn.dao.RoomCategoryDao;
 import com.epam.elearn.dao.DBException;
 import com.epam.elearn.entity.RoomCategory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RoomCategoryDaoImpl implements RoomCategoryDao {
-    private final DBConnectionManager dbManager;
+    private final DBManagerMySQL dbManager;
 
     public RoomCategoryDaoImpl() {
-        dbManager = new DBConnectionManager();
+        dbManager = new DBManagerMySQL();
     }
 
     @Override
     public void create(final RoomCategory entity) throws DBException {
-        Connection conn = new PoolConnectionBuilder().getConnection();
+        Connection conn = dbManager.getConnection();
 
         try (PreparedStatement ps = conn.prepareStatement(Queries.CREATE_ROOM_CATEGORY)) {
             ps.setString(1, entity.title());

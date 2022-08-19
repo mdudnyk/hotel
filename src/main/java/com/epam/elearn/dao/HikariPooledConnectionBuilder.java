@@ -1,7 +1,5 @@
-package com.epam.elearn.dao.impl.mysql;
+package com.epam.elearn.dao;
 
-import com.epam.elearn.dao.ConnectionBuilder;
-import com.epam.elearn.dao.DBException;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -9,10 +7,11 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class PoolConnectionBuilder implements ConnectionBuilder {
+public class HikariPooledConnectionBuilder implements ConnectionBuilder {
+    private static HikariPooledConnectionBuilder instance;
     private static HikariDataSource dataSource;
 
-    public PoolConnectionBuilder() {
+    private HikariPooledConnectionBuilder() {
         if (dataSource == null) {
             String propertiesFilename = "hikari.properties";
             URL url = this.getClass()
@@ -28,13 +27,20 @@ public class PoolConnectionBuilder implements ConnectionBuilder {
         }
     }
 
+    public static HikariPooledConnectionBuilder getInstance() {
+        if (instance == null) {
+            instance = new HikariPooledConnectionBuilder();
+        }
+        return instance;
+    }
+
     @Override
     public Connection getConnection() throws DBException {
         Connection connection;
         try {
             connection = dataSource.getConnection();
         } catch (SQLException e) {
-            throw new DBException("Can not get connection from hikari connection pool: ", e.getMessage());
+            throw new DBException("Can not get connection from the Hikari connection pool: ", e.getMessage());
         }
         return connection;
     }
