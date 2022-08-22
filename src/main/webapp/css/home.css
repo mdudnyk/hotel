@@ -1,3 +1,18 @@
+html {
+  background: url("../img/lobbie.jpg") no-repeat center fixed;
+  background-size: cover;
+}
+
+/* Style the header */
+.header {
+  background-color: dimgrey;
+  color: whitesmoke;
+  padding: 20px;
+  text-align: center;
+
+}
+
+
 body {
   color: #000;
   overflow-x: hidden;
@@ -9,6 +24,7 @@ body {
 .container {
   padding-top: 120px;
   padding-bottom: 120px;
+  background: transparent;
 }
 
 input {
@@ -18,7 +34,7 @@ input {
   box-sizing: border-box;
   background-color: #fff !important;
   color: #2C3E50;
-  font-size: 14px;
+  font-size: 24px !important;
   letter-spacing: 1px;
   position: relative;
 }
@@ -116,11 +132,25 @@ thead tr:nth-child(3) th {
 
 .btn-black {
   background-color: #37474F !important;
+  border-radius: 0 10px 10px 0 !important;
+  font-size: 24px !important;
   color: #fff !important;
   width: 100%;
 }
 
 .btn-black:hover {
   color: #fff !important;
-  background-color: #000 !important;
+  background-color: #262424 !important;
+}
+
+#leftForm {
+  border-radius: 10px 0 0 10px !important;
+}
+
+#rightForm {
+  border-radius: 0 !important;
+}
+
+#hiddenForm {
+  background-color: transparent;
 }
