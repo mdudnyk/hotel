@@ -1,22 +1,25 @@
 package com.epam.elearn.command;
 
-import com.epam.elearn.command.impl.get.ErrorPageCommand;
-import com.epam.elearn.command.impl.get.HomePageCommand;
-import com.epam.elearn.command.impl.get.SignUpPageCommand;
+import com.epam.elearn.command.impl.get.CategoryPageFrontCommand;
+import com.epam.elearn.command.impl.get.ErrorPageFrontCommand;
+import com.epam.elearn.command.impl.get.HomePageFrontCommand;
+import com.epam.elearn.command.impl.get.SignUpPageFrontCommand;
 
 public enum CommandEnum {
 
-    HOME_PAGE(new HomePageCommand()),
-    SIGN_UP_PAGE(new SignUpPageCommand()),
-    ERROR_PAGE(new ErrorPageCommand());
+    HOME_PAGE(new HomePageFrontCommand()),
+    SIGN_UP_PAGE(new SignUpPageFrontCommand()),
+    CATEGORY_PAGE(new CategoryPageFrontCommand()),
+    ERROR_PAGE(new ErrorPageFrontCommand());
 
-    private final Command command;
 
-    CommandEnum(Command command) {
-        this.command = command;
+    private final FrontCommand frontCommand;
+
+    CommandEnum(FrontCommand frontCommand) {
+        this.frontCommand = frontCommand;
     }
 
-    public Command getCommand() {
-        return command;
+    public FrontCommand getCommand() {
+        return frontCommand;
     }
 }

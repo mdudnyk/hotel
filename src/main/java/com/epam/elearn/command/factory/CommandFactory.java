@@ -1,7 +1,7 @@
 package com.epam.elearn.command.factory;
 
 import com.epam.elearn.command.CommandEnum;
-import com.epam.elearn.command.Command;
+import com.epam.elearn.command.FrontCommand;
 import jakarta.servlet.http.HttpServletRequest;
 
 public final class CommandFactory {
@@ -9,20 +9,20 @@ public final class CommandFactory {
     private CommandFactory() {
     }
 
-    public static Command getCommand(HttpServletRequest request) {
-        String commandFromRequest = request.getParameter("command");
-        Command command;
+    public static FrontCommand getCommand(HttpServletRequest request) {
+        String commandFromRequest = request.getParameter("cmd");
+        FrontCommand frontCommand = null;
 
         if (commandFromRequest != null) {
             try {
-                command = CommandEnum.valueOf(commandFromRequest).getCommand();
+                frontCommand = CommandEnum.valueOf(commandFromRequest).getCommand();
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
-                command = CommandEnum.ERROR_PAGE.getCommand();
+                frontCommand = CommandEnum.ERROR_PAGE.getCommand();
             }
         } else {
-            command = CommandEnum.ERROR_PAGE.getCommand();
+            frontCommand = CommandEnum.ERROR_PAGE.getCommand();
         }
-        return command;
+        return frontCommand;
     }
 }

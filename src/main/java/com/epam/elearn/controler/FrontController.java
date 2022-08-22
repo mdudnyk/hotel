@@ -1,6 +1,6 @@
 package com.epam.elearn.controler;
 
-import com.epam.elearn.command.Command;
+import com.epam.elearn.command.FrontCommand;
 import com.epam.elearn.command.factory.CommandFactory;
 import com.epam.elearn.dao.DBException;
 import jakarta.servlet.*;
@@ -34,7 +34,7 @@ public class FrontController extends HttpServlet {
     }
 
     private String handleRequest(HttpServletRequest req, HttpServletResponse resp) throws DBException {
-        Command command = CommandFactory.getCommand(req);
-        return command.execute(req, resp);
+        FrontCommand frontCommand = CommandFactory.getCommand(req);
+        return frontCommand.execute(req, resp);
     }
 }
