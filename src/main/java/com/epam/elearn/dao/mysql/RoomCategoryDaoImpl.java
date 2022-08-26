@@ -4,7 +4,10 @@ import com.epam.elearn.dao.RoomCategoryDao;
 import com.epam.elearn.dao.DBException;
 import com.epam.elearn.entity.RoomCategory;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +78,7 @@ public class RoomCategoryDaoImpl implements RoomCategoryDao {
             ps.setInt(6, entity.id());
             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new DBException("Can not update room category from database.", e);
+            throw new DBException("Can not update room category in database.", e);
         }
 
         dbManager.returnConnection(connection);
