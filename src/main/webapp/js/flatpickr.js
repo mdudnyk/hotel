@@ -1,7 +1,7 @@
 config_start = {
     dateFormat: "Y-m-d",
     altInput: true,
-
+ 
     altFormat: "D, j M Y",
     minDate: "today",
     maxDate: new Date().fp_incr(90),
@@ -38,7 +38,7 @@ config_end = {
 function changeStartDate() {
     let date = new Date(endDate.selectedDates);
     startDate.config.maxDate = date.fp_incr(-1);
-
+    
     if (startDate.selectedDates.length == 0) {
         startDate.open();
     } else {
@@ -58,10 +58,10 @@ search_button.type = "button";
 
 search_button.addEventListener('mouseover', (e) => {
     if (startDate.selectedDates.length == 0) {
-        startD.style.animation="shake 0.2s ease-in 0.4s 20";
+        startD.style.animation="shake 0.2s ease-in 0.3s 20";
     }
     if (endDate.selectedDates.length == 0) {
-        endD.style.animation="shake 0.2s ease-in 0.4s 20";
+      endD.style.animation="shake 0.2s ease-in 0.3s 20";
     }
 });
 
@@ -69,6 +69,3 @@ search_button.addEventListener('mouseout', (e) => {
     startD.style.animation="none";
     endD.style.animation="none";
 });
-
-
-

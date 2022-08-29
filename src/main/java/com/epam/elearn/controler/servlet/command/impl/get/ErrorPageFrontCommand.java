@@ -1,6 +1,6 @@
-package com.epam.elearn.command.impl.get;
+package com.epam.elearn.controler.servlet.command.impl.get;
 
-import com.epam.elearn.command.FrontCommand;
+import com.epam.elearn.controler.servlet.command.FrontCommand;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 

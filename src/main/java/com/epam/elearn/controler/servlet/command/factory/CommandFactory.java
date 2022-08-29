@@ -1,7 +1,7 @@
-package com.epam.elearn.command.factory;
+package com.epam.elearn.controler.servlet.command.factory;
 
-import com.epam.elearn.command.CommandEnum;
-import com.epam.elearn.command.FrontCommand;
+import com.epam.elearn.controler.servlet.command.CommandEnum;
+import com.epam.elearn.controler.servlet.command.FrontCommand;
 import jakarta.servlet.http.HttpServletRequest;
 
 public final class CommandFactory {

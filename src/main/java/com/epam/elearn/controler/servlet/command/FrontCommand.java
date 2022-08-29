@@ -1,4 +1,4 @@
-package com.epam.elearn.command;
+package com.epam.elearn.controler.servlet.command;
 
 import com.epam.elearn.dao.DBException;
 import jakarta.servlet.http.HttpServletRequest;

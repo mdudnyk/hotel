@@ -450,7 +450,7 @@
 											"top": 729,
 											"width": 135,
 											"height": 13,
-											"text": "-role: UserRole",
+											"text": "-role: UserRoles",
 											"horizontalAlignment": 0
 										}
 									],
@@ -845,7 +845,7 @@
 											"top": 684,
 											"width": 111,
 											"height": 13,
-											"text": "UserRole"
+											"text": "UserRoles"
 										},
 										{
 											"_type": "LabelView",
@@ -1032,7 +1032,7 @@
 											"top": 752,
 											"width": 111,
 											"height": 13,
-											"text": "ADMINISTRATOR",
+											"text": "ADMIN",
 											"horizontalAlignment": 0
 										}
 									],
@@ -7089,7 +7089,8 @@
 								"$ref": "AAAAAAGCJxQhLCBPCrE="
 							},
 							"name": "roomClass",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -7201,7 +7202,9 @@
 							},
 							"name": "role",
 							"visibility": "private",
-							"type": "UserRole"
+							"type": {
+								"$ref": "AAAAAAGCJ0hN8jFYtbE="
+							}
 						}
 					]
 				},
@@ -7282,7 +7285,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "UserRole",
+					"name": "UserRoles",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -7343,7 +7346,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGCJ0hN8jFYtbE="
 							},
-							"name": "ADMINISTRATOR"
+							"name": "ADMIN"
 						}
 					]
 				},
@@ -7495,7 +7498,8 @@
 								"$ref": "AAAAAAGCJ00OHjguKgU="
 							},
 							"name": "roomClass",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",

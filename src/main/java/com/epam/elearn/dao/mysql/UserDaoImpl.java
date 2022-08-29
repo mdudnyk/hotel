@@ -1,9 +1,9 @@
 package com.epam.elearn.dao.mysql;
 
-import com.epam.elearn.dao.DBException;
 import com.epam.elearn.dao.UserDao;
-import com.epam.elearn.entity.UserRoles;
-import com.epam.elearn.entity.User;
+import com.epam.elearn.model.User;
+import com.epam.elearn.dao.DBException;
+import com.epam.elearn.model.UserRoles;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,9 +11,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
-public class UserDaoImpl implements UserDao {
+class UserDaoImpl implements UserDao {
     private final DBManagerMySQL dbManager;
 
     public UserDaoImpl() {
@@ -28,7 +29,7 @@ public class UserDaoImpl implements UserDao {
             fillPreparedStatement(ps, entity);
             ps.execute();
         } catch (SQLException e) {
-            throw new DBException("Can not add new user to the database.", e);
+            throw new DBException("Can not add new user to the database. ", e);
         }
 
         dbManager.returnConnection(connection);
@@ -44,7 +45,7 @@ public class UserDaoImpl implements UserDao {
                 list.add(fillEntityFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            throw new DBException("Error while trying to get users list from database." + e);
+            throw new DBException("Error while trying to get users list from database. " + e);
         }
 
         dbManager.returnConnection(connection);
@@ -56,11 +57,30 @@ public class UserDaoImpl implements UserDao {
         Connection connection = dbManager.getConnection();
         User user;
 
-        try (ResultSet resultSet = dbManager.getResultSet(connection, Queries.GET_USER_BY_ID)) {
+        try (ResultSet resultSet = dbManager.getResultSet(connection, Queries.GET_USER_BY_ID, id)) {
             resultSet.next();
             user = fillEntityFromResultSet(resultSet);
         } catch (SQLException e) {
-            throw new DBException("Error while trying to get user by it`s id." + e);
+            throw new DBException("Error while trying to get user by it`s id. " + e);
+        }
+
+        dbManager.returnConnection(connection);
+        return user;
+    }
+
+    @Override
+    public User getUserByEmail(final String email) throws DBException {
+        Connection connection = dbManager.getConnection();
+        User user;
+
+        try (PreparedStatement pSt = connection.prepareStatement(Queries.GET_USER_BY_EMAIL)) {
+            pSt.setString(1, email);
+            ResultSet rSet = pSt.executeQuery();
+            rSet.next();
+            user = fillEntityFromResultSet(rSet);
+            rSet.close();
+        } catch (SQLException e) {
+            throw new DBException("Error while trying to get user by it`s email: " + email + ". " + e);
         }
 
         dbManager.returnConnection(connection);
@@ -76,7 +96,7 @@ public class UserDaoImpl implements UserDao {
             ps.setInt(6, entity.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new DBException("Can not update user in database.", e);
+            throw new DBException("Can not update user in database. ", e);
         }
 
         dbManager.returnConnection(connection);
@@ -93,7 +113,7 @@ public class UserDaoImpl implements UserDao {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new DBException("Can not delete room category from database.", e.getMessage());
+            throw new DBException("Can not delete room category from database. ", e.getMessage());
         }
 
         dbManager.returnConnection(connection);
@@ -112,7 +132,7 @@ public class UserDaoImpl implements UserDao {
         String name = resultSet.getString(2);
         String surname = resultSet.getString(3);
         String email = resultSet.getString(4);
-        String password = resultSet.getString(4);
+        String password = resultSet.getString(5);
         UserRoles role = UserRoles.valueOf(resultSet.getString(6));
 
         return new User(id, name, surname, email, password, role);

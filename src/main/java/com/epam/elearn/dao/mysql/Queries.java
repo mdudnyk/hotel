@@ -1,6 +1,6 @@
 package com.epam.elearn.dao.mysql;
 
-public class Queries {
+class Queries {
     //ROOM_CATEGORY
     public static final String CREATE_ROOM_CATEGORY = "INSERT INTO category values (DEFAULT, ?, ?, ?, ?, ?)";
     public static final String GET_ALL_ROOM_CATEGORY = "SELECT * FROM category";
@@ -12,6 +12,7 @@ public class Queries {
     public static final String CREATE_USER = "INSERT INTO user values (DEFAULT, ?, ?, ?, ?, ?)";
     public static final String GET_ALL_USERS = "SELECT * FROM user";
     public static final String GET_USER_BY_ID = "SELECT * FROM user WHERE id=?";
+    public static final String GET_USER_BY_EMAIL = "SELECT * FROM user WHERE email=?";
     public static final String UPDATE_USER = "UPDATE user SET values (name=?, surname=?, email=?, password=?, role=?) WHERE id=?";
     public static final String DELETE_USER = "DELETE FROM user WHERE id=?";
 
@@ -21,5 +22,6 @@ public class Queries {
     public static final String GET_BOOKING_BY_ID = "SELECT * FROM booking WHERE id=?";
     public static final String UPDATE_BOOKING = "UPDATE booking SET values (name=?, surname=?, email=?, password=?, role=?) WHERE id=?";
     public static final String DELETE_BOOKING = "DELETE FROM booking WHERE id=?";
+
 
 }

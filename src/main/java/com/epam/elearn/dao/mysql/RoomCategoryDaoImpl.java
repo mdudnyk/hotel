@@ -1,8 +1,8 @@
 package com.epam.elearn.dao.mysql;
 
-import com.epam.elearn.dao.RoomCategoryDao;
 import com.epam.elearn.dao.DBException;
-import com.epam.elearn.entity.RoomCategory;
+import com.epam.elearn.dao.RoomCategoryDao;
+import com.epam.elearn.model.RoomCategory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoomCategoryDaoImpl implements RoomCategoryDao {
+class RoomCategoryDaoImpl implements RoomCategoryDao {
     private final DBManagerMySQL dbManager;
 
     public RoomCategoryDaoImpl() {
@@ -26,7 +26,7 @@ public class RoomCategoryDaoImpl implements RoomCategoryDao {
             fillPreparedStatement(ps, entity);
             ps.execute();
         } catch (SQLException e) {
-            throw new DBException("Can not add new room category to the database.", e);
+            throw new DBException("Can not add new room category to the database. ", e);
         }
 
         dbManager.returnConnection(connection);
@@ -42,7 +42,7 @@ public class RoomCategoryDaoImpl implements RoomCategoryDao {
                 list.add(fillEntityFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            throw new DBException("Error while trying to get room categories list from database." + e);
+            throw new DBException("Error while trying to get room categories list from database. " + e);
         }
 
         dbManager.returnConnection(connection);
@@ -54,11 +54,11 @@ public class RoomCategoryDaoImpl implements RoomCategoryDao {
         Connection connection = dbManager.getConnection();
         RoomCategory roomCategory;
 
-        try (ResultSet resultSet = dbManager.getResultSet(connection, Queries.GET_ROOM_CATEGORY_BY_ID)) {
+        try (ResultSet resultSet = dbManager.getResultSet(connection, Queries.GET_ROOM_CATEGORY_BY_ID, id)) {
             resultSet.next();
             roomCategory = fillEntityFromResultSet(resultSet);
         } catch (SQLException e) {
-            throw new DBException("Error while trying to get room category by it`s id." + e);
+            throw new DBException("Error while trying to get room category by it`s id. " + e);
         }
 
         dbManager.returnConnection(connection);
@@ -78,7 +78,7 @@ public class RoomCategoryDaoImpl implements RoomCategoryDao {
             ps.setInt(6, entity.id());
             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new DBException("Can not update room category in database.", e);
+            throw new DBException("Can not update room category in database. ", e);
         }
 
         dbManager.returnConnection(connection);
@@ -96,7 +96,7 @@ public class RoomCategoryDaoImpl implements RoomCategoryDao {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new DBException("Can not delete room category from database.", e.getMessage());
+            throw new DBException("Can not delete room category from database. ", e.getMessage());
         }
 
         dbManager.returnConnection(connection);

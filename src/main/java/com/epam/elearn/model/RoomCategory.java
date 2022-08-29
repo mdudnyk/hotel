@@ -1,4 +1,4 @@
-package com.epam.elearn.entity;
+package com.epam.elearn.model;
 
 public record RoomCategory(int id,
                            String title,

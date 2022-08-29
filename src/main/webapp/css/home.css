@@ -23,6 +23,7 @@ body {
   background-image: url('../img/hall-banner.jpg');
   background-attachment: fixed;
   background-size: cover;
+  
 }
 
 input {
@@ -30,13 +31,41 @@ input {
   transition: ease 0.3s;
   background-color: whitesmoke;
 
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 12pt;
+  font-style: normal;
+  color:#444;
+  letter-spacing: .15em;
+
+  padding: 12px;
+}
+
+
+
+button {
+  border-radius: 25px;
+  background-color: #F9A825;
+  height: 50px;
+  width: 160px;
+  transition: 0.2s ease-out;
+
   font-weight: 400;
   font-size: 12pt;
   font-style: normal;
   text-transform: uppercase;
   color:#444;
-  letter-spacing: .15em;
+  letter-spacing: .16em;
 }
+
+button:hover {
+  border-radius: 20px;
+  background-color: #faa41a;
+  color:whitesmoke;
+  font-size: 13pt;
+}
+
+/*HEADER OF PAGE*/
 
 .header {
   z-index: 2;
@@ -59,33 +88,14 @@ input {
 }
 
 .header__logo {
+  z-index: 3;
   margin-left: 30px;
 }
 
-.header__sign-in-button {
-  margin-top: 3px;
-  margin-right: 40px;
-}
 
 .header__sing-in-btn {
-  border-radius: 25px;
-  background-color: #F9A825;
-  height: 50px;
-  width: 160px;
-
-  font-weight: 400;
-  font-size: 12pt;
-  font-style: normal;
-  text-transform: uppercase;
-  color:#444;
-  letter-spacing: .16em;
-}
-
-.header__sing-in-btn:hover {
-  border-radius: 20px;
-  background-color: #faa41a;
-  color:whitesmoke;
-  font-size: 13pt;
+  margin-top: 3px;
+  margin-right: 40px;
 }
 
 
@@ -105,66 +115,81 @@ input {
 
 
 
-.wrapper {
-  padding-top: 130px;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+/*CONTENT OF PAGE*/
 
 .content {
-  align-self: center;
-  z-index: 0;
-  flex-grow: 1;
-  width: 100%;
-  margin-top: -12%;
-
   display: flex;
   flex-direction: column;
 
-  justify-self: center;
-  justify-content: center;
-  align-content: center;
-
-  background-color: rgba(20, 20, 20, 0.5);
+  padding-top: 12%;
+  position: absolute;
+  width: 100%;
+  top: 100px;
 }
 
-.content__row {
-  justify-self: center;
+.content__datepicker {
+  display: flex;
+  flex-direction: column;
   align-self: center;
-}
+  align-items: center;
 
-.content__main-text{
-  text-align: center;
+  width: max-content;
+  padding: 50px;
+  border-radius: 50px;
+  background-color: rgba(120, 115, 115, 0.8);
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.3);
 
-  animation: 3s move ease-out;
+  animation: 1.8s move,  ease-out;
 }
 
 .content__welcome {
+  padding-bottom: 10px;
+
   color: whitesmoke;
   font-size: 50pt;
   font-weight: 200;
-  text-shadow: 0.5px 0.5px 3px #000000;
-  margin-bottom: 40px;
 
-  animation: 2s show ease-out;
+  animation: 1.7s show ease-out;
 }
 
 .content__please {
+  padding-bottom: 30px;
+
   color: whitesmoke;
   font-size: 22pt;
   letter-spacing: .18em;
   font-weight: 200;
-  text-shadow: 0.5px 1px 3px #000000;
-  margin-bottom: 40px;
 
-  animation: 1s show ease-out;
-  animation-timing-function:cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  animation: 2.0s show_2 ease-out;
+}
+
+.content__search-form {
+  border-radius: 35px;
+  display: flex;
+  flex-direction: row;
+  height: 70px;
+  width: 900px;
+
+  animation: 2.5s show ease-out;
 }
 
 @keyframes move {
-  from { margin-top: -10%; }
-  to { margin-top: 0; }
+  0% { 
+    margin-top: -10%;
+    background-color: rgba(95, 95, 95, 0.0);
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.0);
+   }
+
+  40% {
+    background-color: rgba(95, 95, 95, 0.0);
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.0);
+   }
+  
+  100% {
+    margin-top: 0;
+    background-color: rgba(120, 115, 115, 0.8);
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.3);
+  }
 }
 
 @keyframes show {
@@ -172,24 +197,18 @@ input {
   to { opacity: 1; }
 }
 
-
-.content__search-form {
-  box-shadow: 0 0 20px 2px rgb(0, 0, 0, 0.35);
-  border-radius: 35px;
-  display: flex;
-  flex-direction: row;
-  height: 70px;
-  width: 900px;
-  justify-content: center;
+@keyframes show_2 {
+  0% { opacity: 0; }
+  80% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
-.content__start-date {
 
+.content__start-date {
   width: 350px;
 }
 
 .content__end-date {
-
   width: 350px;
 }
 
@@ -218,19 +237,12 @@ input {
 }
 
 .content__search-button {
-  background-color: #F9A825;
   border-radius: 0 35px 35px 0;
   height: 100%;
   width: 100%;
 
   font-weight: 400;
   font-size: 16pt;
-  font-style: normal;
-  text-transform: uppercase;
-  color:#444;
-  letter-spacing: .16em;
-
-  transition: 0.2s ease-out;
 }
 
 .content__start-date-field:hover {
@@ -264,16 +276,16 @@ input {
 }
 
 @keyframes shake {
-  0% {
-    padding-left: 13%;
-  }
-  50% {
+    0% {
+        padding-left: 13%;
+    }
+    50% {
 
-    padding-left: 14%;
-  }
-  100% {
-    padding-left: 13%;
-  }
+        padding-left: 14%;
+    }
+    100% {
+        padding-left: 13%;
+    }
 }
 
 .content__start-date-field:hover::placeholder {
@@ -288,14 +300,17 @@ input {
 
 
 
+/*FOOTER OF PAGE*/
+
 .footer {
   z-index: 1;
-  flex: 0 0 auto;
-  position: sticky;
 
+  position: fixed;
+  left: 0;
   bottom: 0;
-  flex-basis: 40px;
-
+  width: 100%;
+  height: 40px;
+  
   opacity: 80%;
   background-color: dimgrey;
   box-shadow: -0px -5px 26px -12px rgba(0,0,0,1);
@@ -320,3 +335,58 @@ input {
   font-weight: 400;
   letter-spacing: 1.5pt;
 }
+
+
+
+
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(31, 49, 58, 0.6);
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal__content {
+  background-color: rgb(177, 177, 177);
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border-radius: 20px;
+  padding: 30px;
+  width: 600px;
+  height: max-content;
+  color: #444;
+}
+
+/* The Modal Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+.modal__email-input {
+  text-transform: none;
+}
+
+.modal__password-input {
+  text-transform: none;
+}
+

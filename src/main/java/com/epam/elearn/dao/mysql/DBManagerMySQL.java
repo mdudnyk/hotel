@@ -1,14 +1,13 @@
 package com.epam.elearn.dao.mysql;
 
-import com.epam.elearn.dao.HikariPooledConnectionBuilder;
 import com.epam.elearn.dao.ConnectionBuilder;
+import com.epam.elearn.dao.HikariPooledConnectionBuilder;
 import com.epam.elearn.dao.DBException;
 
 import java.sql.*;
 
-public class DBManagerMySQL {
+class DBManagerMySQL {
     private final ConnectionBuilder cb;
-
 
     public DBManagerMySQL() {
         cb = HikariPooledConnectionBuilder.getInstance();
@@ -24,7 +23,7 @@ public class DBManagerMySQL {
         try {
             preparedStatement = connection.prepareStatement(sqlQuery);
         } catch (SQLException e) {
-            throw new DBException("Can not prepare statement for query: " + sqlQuery, e);
+            throw new DBException("Can not prepare statement for query: " + sqlQuery + ". ", e);
         }
 
         return preparedStatement;
@@ -36,8 +35,24 @@ public class DBManagerMySQL {
         try {
             Statement stmt = connection.createStatement();
             resultSet = stmt.executeQuery(sqlQuery);
+            stmt.close();
         } catch (SQLException e) {
-            throw new DBException("Can not get ResultSet", e);
+            throw new DBException("Can not get ResultSet for query: " + sqlQuery + ". ", e);
+        }
+
+        return resultSet;
+    }
+
+    public ResultSet getResultSet(Connection connection, String sqlQuery, Integer id) throws DBException {
+        ResultSet resultSet;
+
+        try {
+            PreparedStatement preparedStatement = getPrepareStmt(connection, sqlQuery);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            throw new DBException("Can not get ResultSet for query: " + sqlQuery + ". ", e);
         }
 
         return resultSet;

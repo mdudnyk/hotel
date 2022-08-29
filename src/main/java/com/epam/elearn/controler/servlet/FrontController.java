@@ -1,7 +1,7 @@
-package com.epam.elearn.controler;
+package com.epam.elearn.controler.servlet;
 
-import com.epam.elearn.command.FrontCommand;
-import com.epam.elearn.command.factory.CommandFactory;
+import com.epam.elearn.controler.servlet.command.FrontCommand;
+import com.epam.elearn.controler.servlet.command.factory.CommandFactory;
 import com.epam.elearn.dao.DBException;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -23,14 +23,12 @@ public class FrontController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String redirect = null;
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-            redirect = handleRequest(request, response);
+            handleRequest(request, response);
         } catch (DBException e) {
             e.printStackTrace();
         }
-        response.sendRedirect(redirect);
     }
 
     private String handleRequest(HttpServletRequest req, HttpServletResponse resp) throws DBException {

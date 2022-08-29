@@ -2,7 +2,7 @@ package com.epam.elearn.dao;
 
 import java.util.List;
 
-public interface CommonDao<E, K> {
+public interface GeneralDao<E, K> {
 
     void create(E entity) throws DBException;
 

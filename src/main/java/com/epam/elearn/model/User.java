@@ -1,4 +1,4 @@
-package com.epam.elearn.entity;
+package com.epam.elearn.model;
 
 import java.util.Objects;
 

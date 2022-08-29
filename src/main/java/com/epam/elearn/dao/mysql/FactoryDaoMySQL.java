@@ -2,6 +2,7 @@ package com.epam.elearn.dao.mysql;
 
 import com.epam.elearn.dao.FactoryDao;
 import com.epam.elearn.dao.RoomCategoryDao;
+import com.epam.elearn.dao.UserDao;
 
 public class FactoryDaoMySQL implements FactoryDao {
     private static FactoryDaoMySQL instance;
@@ -19,5 +20,10 @@ public class FactoryDaoMySQL implements FactoryDao {
     @Override
     public RoomCategoryDao getRoomCategoryDao() {
         return new RoomCategoryDaoImpl();
+    }
+
+    @Override
+    public UserDao getUserDao() {
+        return new UserDaoImpl();
     }
 }
