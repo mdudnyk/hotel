@@ -5,7 +5,7 @@ import com.epam.elearn.dao.DBException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class HomePageFrontCommand implements FrontCommand {
+public class HomePageCommand implements FrontCommand {
     @Override
     public String execute(final HttpServletRequest request, final HttpServletResponse response) throws DBException {
 //        FactoryDao dao = FactoryDao.create("MYSQL");

@@ -1,0 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+
+<footer class="footer">
+    <div class="footer__row">
+        <div class="footer__create-by-text">Created by mdundyk 2022</div>
+        <div class="footer__air-hotel-text">Air Hotel</div>
+    </div>
+</footer>

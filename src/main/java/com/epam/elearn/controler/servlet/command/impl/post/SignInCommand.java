@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-public class SignInHandler implements FrontCommand {
+public class SignInCommand implements FrontCommand {
     @Override
     public String execute(final HttpServletRequest request, final HttpServletResponse response) {
         String email = request.getParameter("email");

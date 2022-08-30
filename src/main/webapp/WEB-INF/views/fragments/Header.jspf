@@ -1,0 +1,77 @@
+<%@ page import="java.util.Enumeration" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+
+<header class="header">
+    <div class="header__row">
+        <div class="header__logo">
+            <img src="${pageContext.request.contextPath}/img/airhotel-logo-dark.svg" alt="Air Hotel" width="auto" height="80px">
+        </div>
+
+        <%
+            Cookie[] cookies = request.getCookies();
+            String cookieName = "name";
+            String username = null;
+
+            if  (cookies != null) {
+                for (Cookie c: cookies) {
+                    if (cookieName.equals(c.getName())) {
+                        username = c.getValue();
+                        break;
+                    }
+                }
+            }
+
+            if (username != null) {
+        %>
+        <div class="header__user-hello-sign-out">
+            <div class="header__hello-text">Hello, <%=username%></div>
+            <form action="controller" method="post">
+                <input type="hidden" name="cmd" value="SIGN_OUT" readonly />
+                <button class="header__sing-out-btn" type="submit">Sign out</button>
+            </form>
+        </div>
+
+        <%
+            } else {
+        %>
+            <div>
+                <button class="header__sing-in-btn" onclick="modal.style.display = 'block';" type="button">Sign in</button>
+            </div>
+        <%
+            }
+        %>
+
+        <div id="id02" class="modal">
+            <span onclick="closeModal()" class="close" title="Close Modal">&#x2715</span>
+            <div class="modal__content">
+                <form class="modal__signin-form">
+                    <div>
+                        <div><label id="id03" class="modal__email-label">email:</label></div>
+                        <input type="text" id="id04" class="modal__email-input" name="email" placeholder="Enter your email" required/>
+                    </div>
+                    <div>
+                        <div><label id="id05" class="modal__password-label">password:</label></div>
+                        <input type="password" id="id06" class="modal__password-input" name="password" placeholder="Enter your password" required/>
+                    </div>
+                    <div id="id01" class="modal__wrong-auth-data">
+                        <p>Oops, we don`t have such user.</p>
+                        <p>Please check your input or register new user to get access.</p>
+                    </div>
+                    <div>
+                        <button type="button" id="id07" class="header__sign-in-btn-modal">Sign in</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="under-header-line">
+    <div class="under-header-line__flag-box">
+        <img id="flag-icon" src="${pageContext.request.contextPath}/img/gb-flag.png" name="gb" alt="GB" width="auto" height="30px">
+    </div>
+</div>
+
+<script src="${pageContext.request.contextPath}/js/sign_in_logic.js"></script>
+<script src="${pageContext.request.contextPath}/js/change_language.js"></script>

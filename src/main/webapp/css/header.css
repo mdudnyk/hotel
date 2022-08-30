@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&display=swap');
+
+*{padding: 0;margin: 0;border: 0;}
+*,*:before,*:after{-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
+:focus,:active{outline: none;}
+a:focus,a:active{outline: none;}
+nav,footer,header,aside{display: block;}
+html,body{height:100%;width:100%;font-size:100%;line-height:1;font-size:14px;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
+input,button,textarea{font-family:inherit;}
+input::-ms-clear{display: none;}
+button{cursor: pointer;}
+button::-moz-focus-inner {padding:0;border:0;}
+a,a:visited{text-decoration: none;}
+a:hover{text-decoration: none;}
+ul li{list-style: none;}
+img{vertical-align: top;}
+h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: inherit;}
+
+body {
+    font-family:'Roboto', sans-serif;
+    font-size: 14px;
+    color: whitesmoke;
+}
+
+input {
+    cursor: pointer;
+    transition: ease 0.3s;
+    background-color: whitesmoke;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 12pt;
+    font-style: normal;
+    color:#444;
+    letter-spacing: .15em;
+    padding: 12px;
+}
+
+button {
+    border-radius: 25px;
+    background-color: #F9A825;
+    height: 50px;
+    width: 160px;
+    transition: 0.2s ease-out;
+    font-weight: 400;
+    font-size: 12pt;
+    font-style: normal;
+    text-transform: uppercase;
+    color:#444;
+    letter-spacing: .16em;
+}
+
+button:hover {
+    border-radius: 20px;
+    background-color: #faa41a;
+    color:whitesmoke;
+    font-size: 13pt;
+}
+
+/*HEADER OF PAGE*/
+
+.header {
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100px;
+    opacity: 100%;
+    background-color: whitesmoke;
+    box-shadow: 0px 6px 28px -8px rgba(0,0,0,0.7);
+}
+
+.header__row {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header__logo {
+    z-index: 3;
+    margin-left: 40px;
+}
+
+.header__user-hello-sign-out {
+    display: flex;
+    align-items: center;
+}
+
+.header__hello-text {
+    height: 50px;
+    color: whitesmoke;
+    font-size: 16pt;
+    letter-spacing: .10em;
+    font-weight: 300;
+    background-color: #36a9e1;
+    padding-top: 14px;
+    padding-left: 30px;
+    padding-right: 20px;
+    border-radius: 25px 0 0 25px;
+}
+
+.header__sing-in-btn {
+    border-radius: 25px;
+    margin-right: 40px;
+}
+
+.header__sing-out-btn {
+    border-radius: 0 25px 25px 0;
+    margin-right: 40px;
+}
+
+.header__sing-in-btn:hover {
+    border-radius: 20px;
+}
+
+.header__sing-out-btn:hover {
+    border-radius: 0 20px 20px 0;
+}
+
+
+.under-header-line {
+    z-index: 1;
+    position: fixed;
+    top: 100px;
+    width: 100%;
+    height: 30px;
+    background-color: #64B5F6;
+    opacity: 95%;
+    display: flex;
+    justify-content: right;
+}
+
+.under-header-line__flag-box {
+    width: 40px;
+    margin-right: 45px;
+    background-color: #5e9fd4;
+}
+
+#flag-icon {
+    padding-left: 5px;
+    cursor: pointer;
+    transition: ease 0.3s;
+}
+
+#flag-icon:hover {
+    scale: 1.2;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(31, 49, 58, 0.6);
+    padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal__content {
+    background-color: rgb(177, 177, 177);
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border-radius: 20px;
+    padding: 30px;
+    width: 600px;
+    height: max-content;
+    color: #444;
+}
+
+/* The Modal Close Button (x) */
+.close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+    color: #f44336;
+    cursor: pointer;
+}
+
+.modal__email-input {
+    text-transform: none;
+}
+
+.modal__password-input {
+    text-transform: none;
+}
+
+.modal__wrong-auth-data {
+    color: #f44336;
+    display: none;
+}

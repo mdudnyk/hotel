@@ -24,11 +24,16 @@ public class FrontController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String redirect = null;
         try {
-            handleRequest(request, response);
+            redirect = handleRequest(request, response);
         } catch (DBException e) {
             e.printStackTrace();
         }
+        if (redirect != null) {
+            response.sendRedirect(redirect);
+        }
+
     }
 
     private String handleRequest(HttpServletRequest req, HttpServletResponse resp) throws DBException {

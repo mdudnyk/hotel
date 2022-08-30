@@ -13,7 +13,7 @@ function changeEndDate() {
     let date = new Date(startDate.selectedDates[0]);
     endDate.config.minDate = date.fp_incr(1);
 
-    if (endDate.selectedDates.length == 0) {
+    if (endDate.selectedDates.length === 0) {
         endDate.jumpToDate(date, true);
         endDate.open();
     } else {
@@ -39,7 +39,7 @@ function changeStartDate() {
     let date = new Date(endDate.selectedDates);
     startDate.config.maxDate = date.fp_incr(-1);
     
-    if (startDate.selectedDates.length == 0) {
+    if (startDate.selectedDates.length === 0) {
         startDate.open();
     } else {
         search_button.type = "submit";
@@ -57,10 +57,10 @@ const endD = document.querySelector(".content__end-date-field.form-control.input
 search_button.type = "button";
 
 search_button.addEventListener('mouseover', (e) => {
-    if (startDate.selectedDates.length == 0) {
+    if (startDate.selectedDates.length === 0) {
         startD.style.animation="shake 0.2s ease-in 0.3s 20";
     }
-    if (endDate.selectedDates.length == 0) {
+    if (endDate.selectedDates.length === 0) {
       endD.style.animation="shake 0.2s ease-in 0.3s 20";
     }
 });

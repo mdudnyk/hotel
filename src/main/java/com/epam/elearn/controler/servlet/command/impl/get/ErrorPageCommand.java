@@ -4,10 +4,9 @@ import com.epam.elearn.controler.servlet.command.FrontCommand;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class SignInPageFrontCommand implements FrontCommand {
+public class ErrorPageCommand implements FrontCommand {
     @Override
     public String execute(final HttpServletRequest request, final HttpServletResponse response) {
-        return "WEB-INF/views/SignInPage";
+        return "WEB-INF/views/ErrorPage";
     }
 }
-

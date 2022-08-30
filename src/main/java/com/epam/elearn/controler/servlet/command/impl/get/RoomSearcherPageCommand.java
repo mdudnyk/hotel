@@ -5,9 +5,9 @@ import com.epam.elearn.dao.DBException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class CategoryPageFrontCommand implements FrontCommand {
+public class RoomSearcherPageCommand implements FrontCommand {
     @Override
     public String execute(final HttpServletRequest request, final HttpServletResponse response) throws DBException {
-        return "WEB-INF/views/showDate";
+        return "WEB-INF/views/RoomSearcherPage";
     }
 }

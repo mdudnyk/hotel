@@ -1,18 +1,15 @@
 package com.epam.elearn.controler.servlet.command;
 
-import com.epam.elearn.controler.servlet.command.impl.get.ErrorPageFrontCommand;
-import com.epam.elearn.controler.servlet.command.impl.get.SignInPageFrontCommand;
-import com.epam.elearn.controler.servlet.command.impl.post.SignInHandler;
-import com.epam.elearn.controler.servlet.command.impl.get.CategoryPageFrontCommand;
-import com.epam.elearn.controler.servlet.command.impl.get.HomePageFrontCommand;
+import com.epam.elearn.controler.servlet.command.impl.get.*;
+import com.epam.elearn.controler.servlet.command.impl.post.SignInCommand;
 
 public enum CommandEnum {
 
-    HOME_PAGE(new HomePageFrontCommand()),
-    SIGN_IN_PAGE(new SignInPageFrontCommand()),
-    SIGN_IN(new SignInHandler()),
-    CATEGORY_PAGE(new CategoryPageFrontCommand()),
-    ERROR_PAGE(new ErrorPageFrontCommand());
+    HOME_PAGE(new HomePageCommand()),
+    SIGN_IN(new SignInCommand()),
+    SIGN_OUT(new SignOutCommand()),
+    ROOM_SEARCHER_PAGE(new RoomSearcherPageCommand()),
+    ERROR_PAGE(new ErrorPageCommand());
 
 
     private final FrontCommand frontCommand;
