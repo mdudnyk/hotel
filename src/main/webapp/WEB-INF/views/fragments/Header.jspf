@@ -63,7 +63,7 @@
                 </div>
                 <div class="modal__sign-up-block">
                     <span>If you want to create new account, you can
-                        <a href="/hotel/controller?cmd=SIGN_UP">
+                        <a href="/hotel/controller?cmd=SIGN_UP_PAGE">
                             <span class="modal__sign-up-text">Sign up</span>
                         </a>
                     </span>

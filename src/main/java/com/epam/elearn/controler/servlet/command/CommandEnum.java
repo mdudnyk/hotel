@@ -7,6 +7,7 @@ import com.epam.elearn.controler.servlet.command.impl.post.*;
 public enum CommandEnum {
 
     HOME_PAGE(new HomePageCommand()),
+    SIGN_UP_PAGE(new SignUpPageCommand()),
     SIGN_UP(new SignUpCommand()),
     SIGN_IN(new SignInCommand()),
     SIGN_OUT(new SignOutCommand()),
