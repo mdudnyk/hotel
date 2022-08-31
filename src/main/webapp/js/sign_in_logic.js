@@ -1,13 +1,7 @@
-const sing_in_btn = document.querySelector(".header__sing-in-btn");
 const sign_in_btn_modal = document.querySelector(".header__sign-in-btn-modal");
-const sing_out_btn = document.querySelector(".header__sing-out-btn");
 const wrong_auth_data = document.getElementById('id01');
-
 const modal = document.getElementById('id02');
-
-const email_label = document.getElementById('id03');
-const email_field = document.getElementById('id04');
-
+const email_label = document.getElementById('id03');const email_field = document.getElementById('id04');
 const password_label = document.getElementById('id05');
 const password_field = document.getElementById('id06');
 let is_sign_in_btn_modal_blocked = false;
@@ -55,7 +49,6 @@ async function tryToSignIn() {
             },
             body: 'email=' +  email_field.value + '&password=' +  password_field.value,
         });
-
         if (response.status === 200) {
             history.go(0);
         } else {
