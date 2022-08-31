@@ -14,6 +14,7 @@ body {
 }
 
 .content__datepicker {
+  border: rgb(77, 181, 255, 0.7) solid 2px;
   display: flex;
   flex-direction: column;
   align-self: center;
@@ -21,9 +22,10 @@ body {
   width: max-content;
   padding: 50px;
   border-radius: 50px;
-  background-color: rgba(120, 115, 115, 0.8);
-  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.3);
+  background-color: rgba(120, 115, 115, 0.9);
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.4);
   animation: 1.8s move,  ease-out;
+
 }
 
 .content__welcome {
@@ -54,6 +56,7 @@ body {
 
 @keyframes move {
   0% {
+    border: rgb(77, 181, 255, 0.0) solid 2px;
     margin-top: -10%;
     background-color: rgba(95, 95, 95, 0.0);
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.0);
@@ -62,9 +65,16 @@ body {
     background-color: rgba(95, 95, 95, 0.0);
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.0);
   }
+  60% {
+    border: rgb(77, 181, 255, 0.0) solid 2px;
+  }
+  90% {
+    border: rgb(77, 181, 255, 0.3) solid 2px;
+  }
   100% {
+    border: rgb(77, 181, 255, 0.7) solid 2px;
     margin-top: 0;
-    background-color: rgba(120, 115, 115, 0.8);
+    background-color: rgba(120, 115, 115, 0.9);
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.3);
   }
 }
