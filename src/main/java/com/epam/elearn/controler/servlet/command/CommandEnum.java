@@ -1,11 +1,13 @@
 package com.epam.elearn.controler.servlet.command;
 
 import com.epam.elearn.controler.servlet.command.impl.get.*;
-import com.epam.elearn.controler.servlet.command.impl.post.SignInCommand;
+import com.epam.elearn.controler.servlet.command.impl.post.*;
+
 
 public enum CommandEnum {
 
     HOME_PAGE(new HomePageCommand()),
+    SIGN_UP(new SignUpCommand()),
     SIGN_IN(new SignInCommand()),
     SIGN_OUT(new SignOutCommand()),
     ROOM_SEARCHER_PAGE(new RoomSearcherPageCommand()),
