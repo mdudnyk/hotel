@@ -1,3 +1,9 @@
+const succs_registr__s_u = document.getElementById('succs_registr__s_u');
+const sign_in_text_s_u = document.getElementById('sign_in_text_s_u');
+const text_block_s_u = document.getElementById('text_block_s_u');
+const input_block_s_u = document.getElementById('input_block_s_u');
+
+
 const text_alert_s_u = document.getElementById('text_alert_s_u');
 const name_text_s_u = document.getElementById('name_text_s_u');
 const name_field_s_u = document.getElementById('name_field_s_u');
@@ -11,7 +17,13 @@ const password_repeat_text_s_u = document.getElementById('password_repeat_text_s
 const password_repeat_field_s_u = document.getElementById('password_repeat_field_s_u');
 const btn_s_u = document.getElementById('btn_s_u');
 
-let alert_msg = "";
+email_field_s_u.onfocus = function (event) {
+    text_alert_s_u.textContent = "";
+}
+
+sign_in_text_s_u.onclick = function(event) {
+    modal.style.display = 'block';
+}
 
 btn_s_u.onclick = function (event) {
     if (validateInput()) {
@@ -86,9 +98,11 @@ async function sendSignUpRequest() {
             '&email=' +  email_field_s_u.value + '&password=' +  password_field_s_u.value,
     });
     if (response.status === 200) {
-        //REDIRECT TO SUCCESS REGISTRATION PAGE
+        text_block_s_u.style.display = "none";
+        input_block_s_u.style.display = "none";
+        succs_registr__s_u.style.display = "block";
     } else {
-        //WRITE ALLERT MESSAGE WITH REASONS
+        text_alert_s_u.textContent = await response.text();
     }
 }
 

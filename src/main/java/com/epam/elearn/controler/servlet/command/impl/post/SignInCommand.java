@@ -32,7 +32,7 @@ public class SignInCommand implements FrontCommand {
             response.addCookie(new Cookie("name", user.getName()));
         } else {
             try{
-                response.sendError(494, "can`t find such user");
+                response.sendError(460, "Can`t find such user");
             } catch (IOException e) {
                 e.printStackTrace();
             }

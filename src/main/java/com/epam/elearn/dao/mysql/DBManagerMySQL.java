@@ -29,6 +29,18 @@ class DBManagerMySQL {
         return preparedStatement;
     }
 
+    public PreparedStatement getPrepareStmt(Connection connection, String sqlQuery, int option) throws DBException {
+        PreparedStatement preparedStatement;
+
+        try {
+            preparedStatement = connection.prepareStatement(sqlQuery, option);
+        } catch (SQLException e) {
+            throw new DBException("Can not prepare statement for query: " + sqlQuery + ". ", e);
+        }
+
+        return preparedStatement;
+    }
+
     public ResultSet getResultSet(Connection connection, String sqlQuery) throws DBException {
         ResultSet resultSet;
 

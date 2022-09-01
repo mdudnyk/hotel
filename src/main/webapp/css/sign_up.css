@@ -64,6 +64,23 @@ body {
     font-size: 38pt;
 }
 
+#succs_registr__s_u {
+    display: none;
+    letter-spacing: 0.02em;
+    color: rgb(1, 104, 6);
+    font-weight: 300;
+    font-size: 28pt;
+}
+
+#sign_in_text_s_u {
+    font-weight: 400;
+    cursor: pointer;
+}
+
+#sign_in_text_s_u:hover {
+    color: #F9A825;
+}
+
 #text_02_s_u {
     margin-top: 10px;
     font-size: 18pt;
@@ -80,7 +97,6 @@ body {
 }
 
 #text_alert_s_u {
-    opacity: 0%;
     display: block;
     text-align: justify;
     color: #f44336;

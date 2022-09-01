@@ -5,13 +5,9 @@ import com.epam.elearn.model.User;
 import com.epam.elearn.dao.DBException;
 import com.epam.elearn.model.UserRoles;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 
 class UserDaoImpl implements UserDao {
@@ -25,9 +21,16 @@ class UserDaoImpl implements UserDao {
     public void create(final User entity) throws DBException {
         Connection connection = dbManager.getConnection();
 
-        try (PreparedStatement ps = dbManager.getPrepareStmt(connection, Queries.CREATE_USER)) {
+        try (PreparedStatement ps = dbManager.getPrepareStmt(connection,
+                Queries.CREATE_USER, Statement.RETURN_GENERATED_KEYS)) {
             fillPreparedStatement(ps, entity);
-            ps.execute();
+            if (ps.executeUpdate() > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        entity.setId(rs.getInt(1));
+                    }
+                }
+            }
         } catch (SQLException e) {
             throw new DBException("Can not add new user to the database. ", e);
         }
@@ -85,6 +88,25 @@ class UserDaoImpl implements UserDao {
 
         dbManager.returnConnection(connection);
         return user;
+    }
+
+    @Override
+    public boolean checkIfEmailExists(final String email) throws DBException {
+        Connection connection = dbManager.getConnection();
+        boolean isEmailExists = true;
+
+        try (PreparedStatement pSt = connection.prepareStatement(Queries.CHECK_IF_EMAIL_EXISTS)) {
+            pSt.setString(1, email);
+            ResultSet rSet = pSt.executeQuery();
+            rSet.next();
+            isEmailExists = rSet.getBoolean(1);
+            rSet.close();
+        } catch (SQLException e) {
+            throw new DBException("Error while trying to check if given email has already exist in user table: " + email + ". " + e);
+        }
+
+        dbManager.returnConnection(connection);
+        return isEmailExists;
     }
 
     @Override

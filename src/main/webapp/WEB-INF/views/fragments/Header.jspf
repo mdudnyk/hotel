@@ -4,7 +4,10 @@
 <header class="header">
     <div class="header__row">
         <div class="header__logo">
-            <img src="${pageContext.request.contextPath}/img/airhotel-logo-dark.svg" alt="Air Hotel" width="auto" height="80px">
+            <img src="${pageContext.request.contextPath}/img/airhotel-logo-dark.svg"
+                 onclick="window.location = '/hotel';"
+                 style="cursor: pointer"
+                 width="auto" height="80px">
         </div>
 
         <%

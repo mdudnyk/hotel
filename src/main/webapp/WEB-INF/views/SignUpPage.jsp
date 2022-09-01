@@ -15,12 +15,15 @@
 <%@ include file="fragments/Header.jspf" %>
 
 <div class="content">
+    <div id="succs_registr__s_u">
+        <p id="text_00_s_u">You have been successfully registered. <a id="sign_in_text_s_u">Sign in</a> to continue.</p>
+    </div>
     <div id="text_block_s_u">
         <p id="text_01_s_u">Please fill all fields</p>
         <p id="text_02_s_u">to complete the process of registration</p>
     </div>
     <div id="alert_block_s_u">
-        <p id="text_alert_s_u">Alert message</p>
+        <p id="text_alert_s_u"></p>
     </div>
     <div id="input_block_s_u">
         <span id="name_text_s_u">Name:</span>
