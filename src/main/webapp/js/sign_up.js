@@ -107,7 +107,7 @@ async function sendSignUpRequest() {
 }
 
 function validateName(name) {
-    const regex =  /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/;
+    const regex =  /^([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$/;
     return regex.test(name);
 }
 
