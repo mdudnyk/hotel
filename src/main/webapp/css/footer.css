@@ -18,12 +18,14 @@
 }
 
 .footer__create-by-text {
+    cursor:default;
     padding: 2px 0 0 15px;
     font-weight: 200;
     letter-spacing: 0.5pt;
 }
 
 .footer__air-hotel-text {
+    cursor:default;
     padding: 0 15px 0 0;
     font-size: 20px;
     font-weight: 400;

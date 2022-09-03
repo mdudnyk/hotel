@@ -32,11 +32,12 @@ body {
 }
 
 .content button {
-    width: 200px;
+    width: 250px;
     margin: 30px;
 }
 
 .content span {
+    cursor: default;
     align-self: start;
     margin-bottom: -7px;
     padding-left: 10px;
@@ -54,6 +55,7 @@ body {
 }
 
 #text_block_s_u {
+    cursor: default;
     margin-bottom: 10px;
     text-align: center;
     letter-spacing: 0.02em;
@@ -65,6 +67,7 @@ body {
 }
 
 #succs_registr__s_u {
+    cursor: default;
     display: none;
     letter-spacing: 0.02em;
     color: rgb(1, 104, 6);
@@ -96,7 +99,38 @@ body {
     align-items: center;
 }
 
+#name_text_s_u_invalid {
+    display: none;
+    color: red;
+}
+
+#surname_text_s_u_invalid {
+    display: none;
+    color: red;
+}
+
+#email_text_s_u_invalid {
+    display: none;
+    color: red;
+}
+
+#password_text_s_u_invalid {
+    display: none;
+    color: red;
+}
+
+#password_repeat_text_s_u_invalid {
+    display: none;
+    color: red;
+}
+
+#password_repeat_text_s_u_not_repeat {
+    display: none;
+    color: red;
+}
+
 #text_alert_s_u {
+    cursor: default;
     display: block;
     text-align: justify;
     color: #f44336;

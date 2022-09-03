@@ -1,8 +1,11 @@
 const sign_in_btn_modal = document.querySelector(".header__sign-in-btn-modal");
 const wrong_auth_data = document.getElementById('id01');
 const modal = document.getElementById('id02');
-const email_label = document.getElementById('id03');const email_field = document.getElementById('id04');
-const password_label = document.getElementById('id05');
+const email_label = document.getElementById('id03_1');
+const email_invalid_label = document.getElementById('id03_2');
+const email_field = document.getElementById('id04');
+const password_label = document.getElementById('id05_1');
+const password_invalid_label = document.getElementById('id05_2');
 const password_field = document.getElementById('id06');
 let is_sign_in_btn_modal_blocked = false;
 
@@ -15,11 +18,11 @@ window.onclick = function(event) {
 
 function closeModal() {
     modal.style.display = "none";
-    email_label.style.color ="#444";
-    email_label.textContent = "email:";
+    email_invalid_label.style.display = "none";
+    email_label.style.display = "block";
     email_field.value = "";
-    password_label.style.color ="#444";
-    password_label.textContent = "password:";
+    password_invalid_label.style.display = "none";
+    password_label.style.display = "block";
     password_field.value = "";
     wrong_auth_data.style.opacity = "0";
     is_sign_in_btn_modal_blocked = false;
@@ -61,20 +64,20 @@ async function tryToSignIn() {
 function validate() {
     let valid = true;
     if (!validateEmail(email_field.value)) {
-        email_label.style.color="red";
-        email_label.textContent = "Email: not valid";
+        email_label.style.display = "none";
+        email_invalid_label.style.display = "block";
         valid = false;
     } else {
-        email_label.style.color="#444";
-        email_label.textContent = "Email:";
+        email_invalid_label.style.display = "none";
+        email_label.style.display = "block";
     }
     if (!validatePassword(password_field.value)) {
-        password_label.style.color="red";
-        password_label.textContent = "Password: not valid";
+        password_label.style.display = "none";
+        password_invalid_label.style.display = "block";
         valid = false;
     } else {
-        password_label.style.color="#444";
-        password_label.textContent = "Password:";
+        password_invalid_label.style.display = "none";
+        password_label.style.display = "block";
     }
     return valid;
 }

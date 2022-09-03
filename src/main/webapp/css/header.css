@@ -117,7 +117,6 @@ button:hover {
     border-radius: 0 20px 20px 0;
 }
 
-
 .under-header-line {
     z-index: 1;
     position: fixed;
@@ -131,18 +130,19 @@ button:hover {
 }
 
 .under-header-line__flag-box {
-    width: 40px;
+    display: flex;
     margin-right: 45px;
     background-color: #5e9fd4;
 }
 
-#flag-icon {
-    padding-left: 5px;
+.under-header-line__flag-box img {
+    margin-left: 5px;
+    margin-right: 5px;
     cursor: pointer;
     transition: ease 0.3s;
 }
 
-#flag-icon:hover {
+.under-header-line__flag-box img:hover {
     scale: 1.2;
 }
 
@@ -172,7 +172,7 @@ button:hover {
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(120, 115, 115, 0.8);
+    background-color: rgba(31, 49, 58, 0.6);
     padding-top: 50px;
 }
 
@@ -184,7 +184,7 @@ button:hover {
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
     border-radius: 20px;
     padding: 30px;
-    width: 410px;
+    width: 440px;
     height: 350px;
     color: #444;
     display: flex;
@@ -208,6 +208,7 @@ button:hover {
 }
 
 .modal__content label {
+    cursor:default;
     font-weight: 300;
     letter-spacing: 0.04em;
     margin-left: 3px;
@@ -221,16 +222,27 @@ button:hover {
     justify-content: center;
 }
 
+#id03_2 {
+    color: red;
+    display: none;
+}
+
+#id05_2 {
+    color: red;
+    display: none;
+}
+
 .modal__sign-in-btn {
     width: 200px;
     margin-top: 10px;
 }
 
 .modal__wrong-auth-data {
+    cursor:default;
     margin-left: 25px;
     margin-right: 25px;
     display: block;
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: 0.06em;
     color: #f44336;
     opacity: 0;
@@ -240,11 +252,16 @@ button:hover {
     font-size: 10pt;
     font-weight: 300;
     letter-spacing: 0.00em;
-    margin-left: 17px;
-    margin-right: 17px;
+    align-self: center;
+}
+
+.modal__sign-up-text1 {
+    cursor:default;
 }
 
 .modal__sign-up-text {
+    cursor:pointer;
+    text-shadow: 0.5px 0.5px 4px rgb(240, 240, 240);
     margin-left: 6px;
     font-size: 11pt;
     font-weight: 600;

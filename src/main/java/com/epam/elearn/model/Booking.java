@@ -1,4 +1,6 @@
 package com.epam.elearn.model;
 
-public class Booking {
+import java.io.Serializable;
+
+public class Booking implements Serializable {
 }

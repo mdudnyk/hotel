@@ -12,12 +12,12 @@ import java.io.IOException;
 
 public class SignInCommand implements FrontCommand {
     @Override
-    public String execute(final HttpServletRequest request, final HttpServletResponse response) {
+    public void execute(final HttpServletRequest request, final HttpServletResponse response) {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         User user = null;
 
-        //EMAIL AND PASSWORD VALIDATION
+        //TODO EMAIL AND PASSWORD VALIDATION
 
         UserService service = new UserService();
 
@@ -38,6 +38,5 @@ public class SignInCommand implements FrontCommand {
             }
         }
 
-        return null;
     }
 }

@@ -5,16 +5,28 @@ const input_block_s_u = document.getElementById('input_block_s_u');
 
 
 const text_alert_s_u = document.getElementById('text_alert_s_u');
+
 const name_text_s_u = document.getElementById('name_text_s_u');
+const name_text_s_u_invalid = document.getElementById('name_text_s_u_invalid');
 const name_field_s_u = document.getElementById('name_field_s_u');
+
 const surname_text_s_u = document.getElementById('surname_text_s_u');
+const surname_text_s_u_invalid = document.getElementById('surname_text_s_u_invalid');
 const surname_field_s_u = document.getElementById('surname_field_s_u');
+
 const email_text_s_u = document.getElementById('email_text_s_u');
+const email_text_s_u_invalid = document.getElementById('email_text_s_u_invalid');
 const email_field_s_u = document.getElementById('email_field_s_u');
+
 const password_text_s_u = document.getElementById('password_text_s_u');
+const password_text_s_u_invalid = document.getElementById('password_text_s_u_invalid');
 const password_field_s_u = document.getElementById('password_field_s_u');
+
 const password_repeat_text_s_u = document.getElementById('password_repeat_text_s_u');
+const password_repeat_text_s_u_invalid = document.getElementById('password_repeat_text_s_u_invalid');
+const password_repeat_text_s_u_not_repeat = document.getElementById('password_repeat_text_s_u_not_repeat');
 const password_repeat_field_s_u = document.getElementById('password_repeat_field_s_u');
+
 const btn_s_u = document.getElementById('btn_s_u');
 
 email_field_s_u.onfocus = function (event) {
@@ -38,52 +50,56 @@ function validateInput() {
     let valid_password = false;
 
     if (!validateName(name_field_s_u.value)) {
-        name_text_s_u.style.color="red";
-        name_text_s_u.textContent = "Name: not valid";
+        name_text_s_u.style.display = "none";
+        name_text_s_u_invalid.style.display = "block";
         valid_form = false;
     } else {
-        name_text_s_u.style.color="#444";
-        name_text_s_u.textContent = "Name:";
+        name_text_s_u_invalid.style.display = "none";
+        name_text_s_u.style.display = "block";
     }
 
     if (!validateName(surname_field_s_u.value)) {
-        surname_text_s_u.style.color="red";
-        surname_text_s_u.textContent = "Surname: not valid";
+        surname_text_s_u.style.display = "none";
+        surname_text_s_u_invalid.style.display = "block";
         valid_form = false;
     } else {
-        surname_text_s_u.style.color="#444";
-        surname_text_s_u.textContent = "Surname:";
+        surname_text_s_u_invalid.style.display = "none";
+        surname_text_s_u.style.display = "block";
     }
 
     if (!validateEmail(email_field_s_u.value)) {
-        email_text_s_u.style.color="red";
-        email_text_s_u.textContent = "Email: not valid";
+        email_text_s_u.style.display = "none";
+        email_text_s_u_invalid.style.display = "block";
         valid_form = false;
     } else {
-        email_text_s_u.style.color="#444";
-        email_text_s_u.textContent = "Email:";
+        email_text_s_u_invalid.style.display = "none";
+        email_text_s_u.style.display = "block";
     }
 
     if (!validatePassword(password_field_s_u.value)) {
-        password_text_s_u.style.color="red";
-        password_text_s_u.textContent = "Password: not valid";
+        password_text_s_u.style.display = "none";
+        password_text_s_u_invalid.style.display = "block";
         valid_form = false;
     } else {
         valid_password = true;
-        password_text_s_u.style.color="#444";
-        password_text_s_u.textContent = "Password:";
+        password_text_s_u_invalid.style.display = "none";
+        password_text_s_u.style.display = "block";
     }
 
     if (!validatePassword(password_repeat_field_s_u.value)) {
-        password_repeat_text_s_u.style.color="red";
-        password_repeat_text_s_u.textContent = "Password: not valid";
+        password_repeat_text_s_u.style.display = "none";
+        password_repeat_text_s_u_invalid.style.display = "block";
         valid_form = false;
     } else {
-        password_repeat_text_s_u.style.color="#444";
-        password_repeat_text_s_u.textContent = "Password:";
+        password_repeat_text_s_u_invalid.style.display = "none";
+        password_repeat_text_s_u.style.display = "block";
         if (valid_password && password_field_s_u.value !== password_repeat_field_s_u.value) {
-            password_repeat_text_s_u.style.color="red";
-            password_repeat_text_s_u.textContent = "Password: the passwords must be identical";
+            password_repeat_text_s_u.style.display = "none";
+            password_repeat_text_s_u_not_repeat.style.display = "block";
+            valid_form = false;
+        } else {
+            password_repeat_text_s_u.style.display = "block";
+            password_repeat_text_s_u_not_repeat.style.display = "none";
         }
     }
 

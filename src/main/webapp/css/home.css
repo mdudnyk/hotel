@@ -29,6 +29,7 @@ body {
 }
 
 .content__welcome {
+  cursor:default;
   padding-bottom: 10px;
   color: whitesmoke;
   font-size: 50pt;
@@ -37,6 +38,8 @@ body {
 }
 
 .content__please {
+  cursor:default;
+  cursor: default;
   padding-bottom: 30px;
   color: whitesmoke;
   font-size: 22pt;

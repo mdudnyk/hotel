@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 
 public class SignUpCommand implements FrontCommand {
     @Override
-    public String execute(final HttpServletRequest request, final HttpServletResponse response) {
+    public void execute(final HttpServletRequest request, final HttpServletResponse response) {
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
         String email = request.getParameter("email");
@@ -31,14 +31,16 @@ public class SignUpCommand implements FrontCommand {
             response.setStatus(461);
             response.setContentType("text/plain");
             try {
+                String msg = e.getMessage();
+                if (request.getSession().getAttribute("lang").equals("ua")) {
+                    msg = "Вибачте, корситувач з таким імейлом вже існує";
+                }
                 PrintWriter out = response.getWriter();
-                out.print(e.getMessage());
+                out.print(msg);
                 out.close();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
-
-        return null;
     }
 }

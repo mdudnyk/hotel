@@ -9,9 +9,15 @@
     <welcome-file-list>
         <welcome-file>/WEB-INF/views/HomePage.jsp</welcome-file>
     </welcome-file-list>
+
     <error-page>
         <error-code>404</error-code>
         <location>/WEB-INF/views/ErrorPage404.jsp</location>
     </error-page>
-    
+
+    <context-param>
+        <param-name>jakarta.servlet.jsp.jstl.fmt.locale</param-name>
+        <param-value>en</param-value>
+    </context-param>
+
 </web-app>
