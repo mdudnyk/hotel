@@ -28,6 +28,6 @@ public class LocaleFilter implements Filter {
 
     public void destroy() {}
 
-    public void init(FilterConfig arg0) throws ServletException {}
+    public void init(FilterConfig arg0) {}
 
 }

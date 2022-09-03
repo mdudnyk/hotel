@@ -29,15 +29,15 @@ const password_repeat_field_s_u = document.getElementById('password_repeat_field
 
 const btn_s_u = document.getElementById('btn_s_u');
 
-email_field_s_u.onfocus = function (event) {
+email_field_s_u.onfocus = function () {
     text_alert_s_u.textContent = "";
 }
 
-sign_in_text_s_u.onclick = function(event) {
+sign_in_text_s_u.onclick = function() {
     modal.style.display = 'block';
 }
 
-btn_s_u.onclick = function (event) {
+btn_s_u.onclick = function () {
     if (validateInput()) {
         sendSignUpRequest();
     } else {
@@ -128,7 +128,7 @@ function validateName(name) {
 }
 
 function validateEmail(email) {
-    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    const regex = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/;
     return regex.test(email);
 }
 

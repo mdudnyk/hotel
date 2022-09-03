@@ -7,7 +7,7 @@
     height: 40px;
     opacity: 80%;
     background-color: dimgrey;
-    box-shadow: 0 0 15px 0px rgba(0,0,0,0.5);
+    box-shadow: 0 0 15px 0 rgba(0,0,0,0.5);
 }
 
 .footer__row {

@@ -28,18 +28,18 @@ function closeModal() {
     is_sign_in_btn_modal_blocked = false;
 }
 
-sign_in_btn_modal.onclick = function (event) {
+sign_in_btn_modal.onclick = function () {
     if (!is_sign_in_btn_modal_blocked) {
         wrong_auth_data.style.opacity = "0";
         tryToSignIn();
     }
 }
 
-email_field.onfocus = function (event) {
+email_field.onfocus = function () {
     is_sign_in_btn_modal_blocked = false;
 }
 
-password_field.onfocus = function (event) {
+password_field.onfocus = function () {
     is_sign_in_btn_modal_blocked = false;
 }
 
