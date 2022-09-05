@@ -1,5 +1,7 @@
 package com.epam.elearn.entity;
 
+import com.epam.elearn.entity.enums.UserRoles;
+
 import java.io.Serializable;
 import java.util.Objects;
 

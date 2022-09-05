@@ -1,6 +1,7 @@
 package com.epam.elearn.dao.mysql;
 
 class Queries {
+
     //ROOM_CATEGORY
     public static final String CREATE_ROOM_CATEGORY = "INSERT INTO category values (DEFAULT, ?, ?, ?, ?, ?)";
     public static final String GET_ALL_ROOM_CATEGORY = "SELECT * FROM category";
@@ -14,7 +15,7 @@ class Queries {
     public static final String GET_ALL_USERS = "SELECT * FROM user";
     public static final String GET_USER_BY_ID = "SELECT * FROM user WHERE id=?";
     public static final String GET_USER_BY_EMAIL = "SELECT * FROM user WHERE email=?";
-    public static final String CHECK_IF_EMAIL_EXISTS = "SELECT EXISTS(SELECT email FROM user WHERE email=?)";
+    public static final String CHECK_IF_EMAIL_EXISTS = "SELECT EXISTS (SELECT email FROM user WHERE email=?)";
     public static final String UPDATE_USER =    "UPDATE user SET values (name=?, surname=?, email=?, password=?, role=?) " +
                                                 "WHERE id=?";
     public static final String DELETE_USER = "DELETE FROM user WHERE id=?";
@@ -24,7 +25,7 @@ class Queries {
     public static final String GET_ALL_BOOKINGS = "SELECT * FROM booking";
     public static final String GET_BOOKING_BY_ID = "SELECT * FROM booking WHERE id=?";
     public static final String UPDATE_BOOKING = "UPDATE booking SET values (id=?, user_id=?, number_of_guests=?, " +
-                                                "rooms_amount=?, total_price=?, booking_status=?, check_in_date=?, " +
+                                                "rooms_amount=?, total_price=?, current_status=?, check_in_date=?, " +
                                                 "check_out_date=?, last_update=?) WHERE id=?";
     public static final String DELETE_BOOKING = "DELETE FROM booking WHERE id=?";
 
@@ -35,4 +36,15 @@ class Queries {
     public static final String UPDATE_ROOM =    "UPDATE room SET values (room_number=?, category_id=?, current_status=?) " +
                                                 "WHERE room_number=?";
     public static final String DELETE_ROOM = "DELETE FROM room WHERE room_number=?";
+
+    //APPLICATION
+    public static final String CREATE_APPLICATION = "INSERT INTO application values (DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
+    public static final String GET_ALL_APPLICATIONS = "SELECT * FROM application";
+    public static final String GET_APPLICATION_BY_ID = "SELECT * FROM application WHERE id=?";
+    public static final String UPDATE_APPLICATION = "UPDATE application SET values (id=?, user_id=?, category_id=?, " +
+                                                    "number_of_guests=?, current_status=?, rooms_amount=?, total_price=?, " +
+                                                    "booking_status=?, check_in_date=?, check_out_date=?, last_update=?) " +
+                                                    "WHERE id=?";
+    public static final String DELETE_APPLICATION = "DELETE FROM application WHERE id=?";
+
 }

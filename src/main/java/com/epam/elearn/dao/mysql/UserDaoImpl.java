@@ -4,7 +4,7 @@ import com.epam.elearn.dao.ConnectionManager;
 import com.epam.elearn.dao.UserDao;
 import com.epam.elearn.entity.User;
 import com.epam.elearn.dao.DBException;
-import com.epam.elearn.entity.UserRoles;
+import com.epam.elearn.entity.enums.UserRoles;
 
 import java.sql.*;
 import java.util.ArrayList;

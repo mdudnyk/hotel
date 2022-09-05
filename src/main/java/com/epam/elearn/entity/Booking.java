@@ -1,5 +1,7 @@
 package com.epam.elearn.entity;
 
+import com.epam.elearn.entity.enums.BookingStatus;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -10,21 +12,21 @@ public class Booking implements Serializable {
     private int numberOfGuests;
     private int roomsAmount;
     private Integer totalPrice;
-    private BookingStatus bookingStatus;
+    private BookingStatus currentStatus;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private LocalDate lastUpdate;
 
     public Booking(final int id, final int userId, final int numberOfGuests,
                    final int roomsAmount, final Integer totalPrice,
-                   final BookingStatus bookingStatus, final LocalDate checkInDate,
+                   final BookingStatus currentStatus, final LocalDate checkInDate,
                    final LocalDate checkOutDate, final LocalDate lastUpdate) {
         this.id = id;
         this.userId = userId;
         this.numberOfGuests = numberOfGuests;
         this.roomsAmount = roomsAmount;
         this.totalPrice = totalPrice;
-        this.bookingStatus = bookingStatus;
+        this.currentStatus = currentStatus;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.lastUpdate = lastUpdate;
@@ -70,12 +72,12 @@ public class Booking implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public BookingStatus getBookingStatus() {
-        return bookingStatus;
+    public BookingStatus getCurrentStatus() {
+        return currentStatus;
     }
 
-    public void setBookingStatus(final BookingStatus bookingStatus) {
-        this.bookingStatus = bookingStatus;
+    public void setCurrentStatus(final BookingStatus bookingStatus) {
+        this.currentStatus = currentStatus;
     }
 
     public LocalDate getCheckInDate() {
@@ -111,7 +113,7 @@ public class Booking implements Serializable {
                 && numberOfGuests == booking.numberOfGuests
                 && roomsAmount == booking.roomsAmount
                 && totalPrice.equals(booking.totalPrice)
-                && bookingStatus == booking.bookingStatus
+                && currentStatus == booking.currentStatus
                 && checkInDate.equals(booking.checkInDate)
                 && checkOutDate.equals(booking.checkOutDate)
                 && lastUpdate.equals(booking.lastUpdate);
@@ -120,7 +122,7 @@ public class Booking implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, userId, numberOfGuests,
-                roomsAmount, totalPrice, bookingStatus,
+                roomsAmount, totalPrice, currentStatus,
                 checkInDate, checkOutDate, lastUpdate);
     }
 }

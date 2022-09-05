@@ -4,7 +4,7 @@ import com.epam.elearn.dao.ConnectionManager;
 import com.epam.elearn.dao.DBException;
 import com.epam.elearn.dao.RoomDao;
 import com.epam.elearn.entity.Room;
-import com.epam.elearn.entity.RoomStatus;
+import com.epam.elearn.entity.enums.RoomStatus;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

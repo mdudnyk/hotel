@@ -4,7 +4,7 @@ import com.epam.elearn.dao.BookingDao;
 import com.epam.elearn.dao.ConnectionManager;
 import com.epam.elearn.dao.DBException;
 import com.epam.elearn.entity.Booking;
-import com.epam.elearn.entity.BookingStatus;
+import com.epam.elearn.entity.enums.BookingStatus;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -102,7 +102,7 @@ public class BookingDaoImpl implements BookingDao {
         ps.setInt(3, entity.getNumberOfGuests());
         ps.setInt(4, entity.getRoomsAmount());
         ps.setInt(5, entity.getTotalPrice());
-        ps.setString(6, entity.getBookingStatus().name());
+        ps.setString(6, entity.getCurrentStatus().name());
         ps.setDate(7, Date.valueOf(entity.getCheckInDate()));
         ps.setDate(8, Date.valueOf(entity.getCheckOutDate()));
         ps.setDate(9, Date.valueOf(entity.getLastUpdate()));
@@ -114,12 +114,12 @@ public class BookingDaoImpl implements BookingDao {
         int numberOfGuests = resultSet.getInt(3);
         int roomsAmount = resultSet.getInt(4);
         int totalPrice = resultSet.getInt(5);
-        BookingStatus bookingStatus = BookingStatus.valueOf(resultSet.getString(6));
+        BookingStatus currentStatus = BookingStatus.valueOf(resultSet.getString(6));
         LocalDate checkInDate = resultSet.getDate(7).toLocalDate();
         LocalDate checkOutDate = resultSet.getDate(8).toLocalDate();
         LocalDate lastUpdate = resultSet.getDate(9).toLocalDate();
 
         return new Booking(id, userId, numberOfGuests, roomsAmount, totalPrice,
-                bookingStatus, checkInDate, checkOutDate, lastUpdate);
+                currentStatus, checkInDate, checkOutDate, lastUpdate);
     }
 }

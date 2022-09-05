@@ -46,4 +46,6 @@ public interface FactoryDao {
 
     BookingDao getBookingDao();
 
+    ApplicationDao getApplicationDao();
+
 }
