@@ -12,7 +12,7 @@ public interface FactoryDao {
         String propertiesFilename = "main_persistence.properties";
         String databaseName = "none";
         String connectionPoolName = "none";
-        ConnectionPoolManager connectionPoolManager = null;
+        ConnectionManager connectionManager = null;
 
         try (InputStream input = FactoryDao.class.getClassLoader().getResourceAsStream(propertiesFilename)) {
             Properties properties = new Properties();
@@ -24,13 +24,13 @@ public interface FactoryDao {
         }
 
         switch (connectionPoolName) {
-            case "HIKARI" -> connectionPoolManager = HikariConnectionPool.getInstance();
+            case "HIKARI" -> connectionManager = HikariConnectionPool.getInstance();
             default -> throw new IllegalArgumentException("Can not create DAO factory " +
                     "for \"" + connectionPoolName + "\", we don't have such connection handler. ");
         }
 
         return switch (databaseName) {
-            case "MYSQL" -> FactoryDaoMySQL.getInstance(connectionPoolManager);
+            case "MYSQL" -> FactoryDaoMySQL.getInstance(connectionManager);
             default -> throw new IllegalArgumentException("Can not create DAO factory " +
                     "for \"" + databaseName + "\", we don't have such database. ");
         };
@@ -41,5 +41,7 @@ public interface FactoryDao {
     RoomCategoryDao getRoomCategoryDao();
 
     UserDao getUserDao();
+
+    RoomDao getRoomDao();
 
 }

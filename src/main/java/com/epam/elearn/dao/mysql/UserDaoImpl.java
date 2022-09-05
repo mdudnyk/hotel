@@ -1,6 +1,6 @@
 package com.epam.elearn.dao.mysql;
 
-import com.epam.elearn.dao.ConnectionPoolManager;
+import com.epam.elearn.dao.ConnectionManager;
 import com.epam.elearn.dao.UserDao;
 import com.epam.elearn.entity.User;
 import com.epam.elearn.dao.DBException;
@@ -11,21 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 class UserDaoImpl implements UserDao {
-    private final ConnectionPoolManager connectionPool;
-    private final DBManagerMySQL dbManager;
-    private Connection connection;
+    private final ConnectionManager connectionPool;
 
-    public UserDaoImpl(ConnectionPoolManager connectionPoolManager) {
-        connectionPool = connectionPoolManager;
-        dbManager = new DBManagerMySQL();
+    public UserDaoImpl(ConnectionManager connectionManager) {
+        connectionPool = connectionManager;
     }
 
     @Override
     public void create(final User entity) throws DBException {
-        connection = connectionPool.getConnection();
-
-        try (PreparedStatement ps = dbManager.getPrepareStmt(connection,
-                Queries.CREATE_USER, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.CREATE_USER, Statement.RETURN_GENERATED_KEYS)) {
             fillPreparedStatement(ps, entity);
             if (ps.executeUpdate() > 0) {
                 try (ResultSet rs = ps.getGeneratedKeys()) {
@@ -37,101 +32,95 @@ class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             throw new DBException("Can not add new user to the database. ", e);
         }
-
-        dbManager.returnConnection(connection);
     }
 
     @Override
     public List<User> getAll() throws DBException {
-        connection = connectionPool.getConnection();
-        List<User> list = new ArrayList<>();
+        List<User> users = new ArrayList<>();
 
-        try (ResultSet resultSet = dbManager.getResultSet(connection, Queries.GET_ALL_USERS)) {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.GET_ALL_USERS);
+             ResultSet resultSet = ps.executeQuery()) {
             while (resultSet.next()) {
-                list.add(fillEntityFromResultSet(resultSet));
+                users.add(fillEntityFromResultSet(resultSet));
             }
         } catch (SQLException e) {
             throw new DBException("Error while trying to get users list from database. " + e);
         }
 
-        dbManager.returnConnection(connection);
-        return list;
+        return users;
     }
 
     @Override
     public User getEntityById(final Integer id) throws DBException {
-        connection = connectionPool.getConnection();
         User user;
 
-        try (ResultSet resultSet = dbManager.getResultSet(connection, Queries.GET_USER_BY_ID, id)) {
-            resultSet.next();
-            user = fillEntityFromResultSet(resultSet);
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.GET_USER_BY_ID)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            user = fillEntityFromResultSet(rs);
+            rs.close();
         } catch (SQLException e) {
             throw new DBException("Error while trying to get user by it`s id. " + e);
         }
 
-        dbManager.returnConnection(connection);
         return user;
     }
 
     @Override
     public User getUserByEmail(final String email) throws DBException {
-        connection = connectionPool.getConnection();
         User user;
 
-        try (PreparedStatement pSt = connection.prepareStatement(Queries.GET_USER_BY_EMAIL)) {
-            pSt.setString(1, email);
-            ResultSet rSet = pSt.executeQuery();
-            rSet.next();
-            user = fillEntityFromResultSet(rSet);
-            rSet.close();
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.GET_USER_BY_EMAIL)) {
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            user = fillEntityFromResultSet(rs);
+            rs.close();
         } catch (SQLException e) {
-            throw new DBException("Error while trying to get user by it`s email: " + email + ". " + e);
+            throw new DBException("Error while trying to get user by it`s id. " + e);
         }
 
-        dbManager.returnConnection(connection);
         return user;
     }
 
     @Override
     public boolean checkIfEmailExists(final String email) throws DBException {
-        connection = connectionPool.getConnection();
         boolean isEmailExists = true;
 
-        try (PreparedStatement pSt = connection.prepareStatement(Queries.CHECK_IF_EMAIL_EXISTS)) {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement pSt = connection.prepareStatement(Queries.CHECK_IF_EMAIL_EXISTS)) {
             pSt.setString(1, email);
-            ResultSet rSet = pSt.executeQuery();
-            rSet.next();
-            isEmailExists = rSet.getBoolean(1);
-            rSet.close();
+            ResultSet rs = pSt.executeQuery();
+            rs.next();
+            isEmailExists = rs.getBoolean(1);
+            rs.close();
         } catch (SQLException e) {
             throw new DBException("Error while trying to check if given email has already exist in user table: " + email + ". " + e);
         }
 
-        dbManager.returnConnection(connection);
         return isEmailExists;
     }
 
     @Override
-    public void update(final User entity) throws DBException {
-        connection = connectionPool.getConnection();
-
-        try (PreparedStatement ps = dbManager.getPrepareStmt(connection, Queries.UPDATE_USER)) {
+    public void update(final Integer id, final User entity) throws DBException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.UPDATE_USER)) {
             fillPreparedStatement(ps, entity);
-            ps.setInt(6, entity.getId());
+            ps.setInt(6, id);
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new DBException("Can not update user in database. ", e);
         }
-
-        dbManager.returnConnection(connection);
     }
 
     @Override
     public void delete(final Integer id) throws DBException {
-        connection = connectionPool.getConnection();
-
-        try (PreparedStatement ps = dbManager.getPrepareStmt(connection, Queries.DELETE_USER)) {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.DELETE_USER)) {
 
             //TODO  Implement realisation of code that delete all bookings and applications of user
 
@@ -140,8 +129,6 @@ class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             throw new DBException("Can not delete room category from database. ", e.getMessage());
         }
-
-        dbManager.returnConnection(connection);
     }
 
     private void fillPreparedStatement(PreparedStatement ps, User entity) throws SQLException {

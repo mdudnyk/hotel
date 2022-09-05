@@ -1,6 +1,6 @@
 package com.epam.elearn.dao.mysql;
 
-import com.epam.elearn.dao.ConnectionPoolManager;
+import com.epam.elearn.dao.ConnectionManager;
 import com.epam.elearn.dao.DBException;
 import com.epam.elearn.dao.RoomCategoryDao;
 import com.epam.elearn.entity.RoomCategory;
@@ -13,86 +13,78 @@ import java.util.ArrayList;
 import java.util.List;
 
 class RoomCategoryDaoImpl implements RoomCategoryDao {
-    private final ConnectionPoolManager connectionPool;
-    private final DBManagerMySQL dbManager;
-    private Connection connection;
+    private final ConnectionManager connectionPool;
 
-    public RoomCategoryDaoImpl(ConnectionPoolManager connectionPoolManager) {
-        connectionPool = connectionPoolManager;
-        dbManager = new DBManagerMySQL();
+    public RoomCategoryDaoImpl(ConnectionManager connectionManager) {
+        connectionPool = connectionManager;
     }
 
     @Override
     public void create(final RoomCategory entity) throws DBException {
-        connection = connectionPool.getConnection();
-
-        try (PreparedStatement ps = dbManager.getPrepareStmt(connection, Queries.CREATE_ROOM_CATEGORY)) {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.CREATE_ROOM_CATEGORY)) {
             fillPreparedStatement(ps, entity);
             ps.execute();
         } catch (SQLException e) {
             throw new DBException("Can not add new room category to the database. ", e);
         }
-
-        dbManager.returnConnection(connection);
     }
 
     @Override
     public List<RoomCategory> getAll() throws DBException {
-        connection = connectionPool.getConnection();
         List<RoomCategory> list = new ArrayList<>();
 
-        try (ResultSet resultSet = dbManager.getResultSet(connection, Queries.GET_ALL_ROOM_CATEGORY)) {
-            while (resultSet.next()) {
-                list.add(fillEntityFromResultSet(resultSet));
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.GET_ALL_ROOM_CATEGORY);
+             ResultSet rs = ps.getResultSet()) {
+            while (rs.next()) {
+                list.add(fillEntityFromResultSet(rs));
             }
         } catch (SQLException e) {
             throw new DBException("Error while trying to get room categories list from database. " + e);
         }
 
-        dbManager.returnConnection(connection);
         return list;
     }
 
     @Override
-    public RoomCategory getEntityById(final Integer id) throws DBException {
-        connection = connectionPool.getConnection();
+    public RoomCategory getEntityById(Integer id) throws DBException {
         RoomCategory roomCategory;
 
-        try (ResultSet resultSet = dbManager.getResultSet(connection, Queries.GET_ROOM_CATEGORY_BY_ID, id)) {
-            resultSet.next();
-            roomCategory = fillEntityFromResultSet(resultSet);
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.GET_ROOM_CATEGORY_BY_ID)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.getResultSet();
+            rs.next();
+            roomCategory = fillEntityFromResultSet(rs);
+            rs.close();
         } catch (SQLException e) {
             throw new DBException("Error while trying to get room category by it`s id. " + e);
         }
 
-        dbManager.returnConnection(connection);
         return roomCategory;
     }
 
     @Override
-    public void update(final RoomCategory entity) throws DBException {
-        connection = connectionPool.getConnection();
-
-        try (PreparedStatement ps = dbManager.getPrepareStmt(connection, Queries.UPDATE_ROOM_CATEGORY)) {
+    public void update(final Integer id, final RoomCategory entity) throws DBException {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.UPDATE_ROOM_CATEGORY)) {
 
             //TODO  Implement realisation of code that checks if such room category exists
             //      in someones booking or application and forbids to update in case of it
 
             fillPreparedStatement(ps, entity);
-            ps.setInt(6, entity.id());
+            ps.setInt(6, id);
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new DBException("Can not update room category in database. ", e);
         }
-
-        dbManager.returnConnection(connection);
     }
 
     @Override
     public void delete(final Integer id) throws DBException {
-        connection = connectionPool.getConnection();
-
-        try (PreparedStatement ps = dbManager.getPrepareStmt(connection, Queries.DELETE_ROOM_CATEGORY)) {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.DELETE_ROOM_CATEGORY)) {
 
             //TODO  Implement realisation of code that checks if such room category exists
             //      in someones booking or application and forbids to delete in case of it
@@ -102,8 +94,6 @@ class RoomCategoryDaoImpl implements RoomCategoryDao {
         } catch (SQLException e) {
             throw new DBException("Can not delete room category from database. ", e.getMessage());
         }
-
-        dbManager.returnConnection(connection);
     }
 
     private void fillPreparedStatement(PreparedStatement ps, RoomCategory entity) throws SQLException {

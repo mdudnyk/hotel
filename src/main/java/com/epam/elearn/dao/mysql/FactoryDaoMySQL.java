@@ -1,23 +1,22 @@
 package com.epam.elearn.dao.mysql;
 
-import com.epam.elearn.dao.ConnectionPoolManager;
-import com.epam.elearn.dao.FactoryDao;
-import com.epam.elearn.dao.RoomCategoryDao;
-import com.epam.elearn.dao.UserDao;
+import com.epam.elearn.dao.*;
 
 public class FactoryDaoMySQL implements FactoryDao {
     private static FactoryDaoMySQL instance;
-    private final ConnectionPoolManager connectionPoolManager;
+    private final ConnectionManager connectionManager;
     private UserDao userDao;
     private RoomCategoryDao roomCategoryDao;
+    private RoomDao roomDao;
 
-    private FactoryDaoMySQL(ConnectionPoolManager cpm) {
-        connectionPoolManager = cpm;
+    private FactoryDaoMySQL(ConnectionManager cpm) {
+        connectionManager = cpm;
         userDao = new UserDaoImpl(cpm);
         roomCategoryDao = new RoomCategoryDaoImpl(cpm);
+        roomDao = new RoomDaoImpl(cpm);
     }
 
-    public static FactoryDaoMySQL getInstance(ConnectionPoolManager cpb) {
+    public static FactoryDaoMySQL getInstance(ConnectionManager cpb) {
         if (instance == null) {
             instance = new FactoryDaoMySQL(cpb);
         }
@@ -35,9 +34,14 @@ public class FactoryDaoMySQL implements FactoryDao {
     }
 
     @Override
+    public RoomDao getRoomDao() {
+        return roomDao;
+    }
+
+    @Override
     public void closeDao() {
         userDao = null;
         roomCategoryDao = null;
-        connectionPoolManager.closeDataSource();
+        connectionManager.closeDataSource();
     }
 }

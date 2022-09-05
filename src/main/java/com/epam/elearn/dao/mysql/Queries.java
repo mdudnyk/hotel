@@ -24,5 +24,10 @@ class Queries {
     public static final String UPDATE_BOOKING = "UPDATE booking SET values (name=?, surname=?, email=?, password=?, role=?) WHERE id=?";
     public static final String DELETE_BOOKING = "DELETE FROM booking WHERE id=?";
 
-
+    //ROOM
+    public static final String CREATE_ROOM = "INSERT INTO room values (?, ?, ?)";
+    public static final String GET_ALL_ROOMS = "SELECT * FROM room";
+    public static final String GET_ROOM_BY_ROOM_NUMBER = "SELECT * FROM room WHERE room_number=?";
+    public static final String UPDATE_ROOM = "UPDATE room SET values (room_number=?, category_id=?, current_status=?) WHERE room_number=?";
+    public static final String DELETE_ROOM = "DELETE FROM room WHERE room_number=?";
 }

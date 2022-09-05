@@ -10,7 +10,7 @@ public interface GeneralDao<E, K> {
 
     E getEntityById(K id) throws DBException;
 
-    void update(E entity) throws DBException;
+    void update(K id, E entity) throws DBException;
 
     void delete(K id) throws DBException;
 

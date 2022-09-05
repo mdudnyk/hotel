@@ -2,9 +2,9 @@ package com.epam.elearn.dao;
 
 import java.sql.Connection;
 
-public class ConnectionPoolBuilderForTest implements ConnectionPoolManager {
+public class ConnectionBuilderForTest implements ConnectionManager {
     private static String FULL_URL;
-    private static ConnectionPoolBuilderForTest dbManager;
+    private static ConnectionBuilderForTest dbManager;
 
     @Override
     public Connection getConnection() {
