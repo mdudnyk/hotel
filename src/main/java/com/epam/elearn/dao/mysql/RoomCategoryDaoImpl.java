@@ -24,7 +24,13 @@ class RoomCategoryDaoImpl implements RoomCategoryDao {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(Queries.CREATE_ROOM_CATEGORY)) {
             fillPreparedStatement(ps, entity);
-            ps.execute();
+            if (ps.executeUpdate() > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        entity.setId(rs.getInt(1));
+                    }
+                }
+            }
         } catch (SQLException e) {
             throw new DBException("Can not add new room category to the database. ", e);
         }
@@ -97,11 +103,11 @@ class RoomCategoryDaoImpl implements RoomCategoryDao {
     }
 
     private void fillPreparedStatement(PreparedStatement ps, RoomCategory entity) throws SQLException {
-        ps.setString(1, entity.title());
-        ps.setInt(2, entity.priceDefault());
-        ps.setInt(3, entity.area());
-        ps.setInt(4, entity.guestsCapacity());
-        ps.setString(5, entity.description());
+        ps.setString(1, entity.getTitle());
+        ps.setInt(2, entity.getPriceDefault());
+        ps.setInt(3, entity.getArea());
+        ps.setInt(4, entity.getGuestsCapacity());
+        ps.setString(5, entity.getDescription());
     }
 
     private RoomCategory fillEntityFromResultSet(ResultSet resultSet) throws SQLException {

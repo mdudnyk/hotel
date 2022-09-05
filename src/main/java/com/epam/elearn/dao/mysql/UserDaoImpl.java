@@ -127,7 +127,7 @@ class UserDaoImpl implements UserDao {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new DBException("Can not delete room category from database. ", e.getMessage());
+            throw new DBException("Can not delete user from database. ", e.getMessage());
         }
     }
 

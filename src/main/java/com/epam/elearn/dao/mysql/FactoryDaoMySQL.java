@@ -8,12 +8,14 @@ public class FactoryDaoMySQL implements FactoryDao {
     private UserDao userDao;
     private RoomCategoryDao roomCategoryDao;
     private RoomDao roomDao;
+    private BookingDao bookingDao;
 
     private FactoryDaoMySQL(ConnectionManager cpm) {
         connectionManager = cpm;
         userDao = new UserDaoImpl(cpm);
         roomCategoryDao = new RoomCategoryDaoImpl(cpm);
         roomDao = new RoomDaoImpl(cpm);
+        bookingDao = new BookingDaoImpl(cpm);
     }
 
     public static FactoryDaoMySQL getInstance(ConnectionManager cpb) {
@@ -39,9 +41,16 @@ public class FactoryDaoMySQL implements FactoryDao {
     }
 
     @Override
+    public BookingDao getBookingDao() {
+        return bookingDao;
+    }
+
+    @Override
     public void closeDao() {
         userDao = null;
         roomCategoryDao = null;
+        roomDao = null;
+        bookingDao = null;
         connectionManager.closeDataSource();
     }
 }
