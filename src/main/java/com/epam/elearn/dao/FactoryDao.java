@@ -2,7 +2,6 @@ package com.epam.elearn.dao;
 
 import com.epam.elearn.dao.mysql.FactoryDaoMySQL;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -10,33 +9,34 @@ import java.util.Properties;
 public interface FactoryDao {
 
     static FactoryDao create() {
-        String propertiesFilename = "../../resources/data_source.properties";
-        String sourceName = "none";
+        String propertiesFilename = "main_persistence.properties";
+        String databaseName = "none";
+        String connectionPoolName = "none";
+        ConnectionPoolManager connectionPoolManager = null;
 
-//        System.out.println(FactoryDaoMySQL.getInstance().getClass().getClassLoader().getResourceAsStream("data_source.properties"));
-
-        try (InputStream input = FactoryDaoMySQL.getInstance().getClass().getClassLoader().getResourceAsStream("data_source.properties")) {
+        try (InputStream input = FactoryDao.class.getClassLoader().getResourceAsStream(propertiesFilename)) {
             Properties properties = new Properties();
             properties.load(input);
-            sourceName = properties.getProperty("data.source");
+            databaseName = properties.getProperty("database.name");
+            connectionPoolName = properties.getProperty("connection.pool");
         } catch (IOException e) {
-            throw new UnsupportedOperationException("The problem with reading properties file named <" + propertiesFilename + ">. ", e);
+            throw new UnsupportedOperationException("The problem with reading properties file, named <" + propertiesFilename + ">. ", e);
         }
 
-//        try (InputStream input = new FileInputStream(propertiesFilename)) {
-//            Properties properties = new Properties();
-//            properties.load(input);
-//            sourceName = properties.getProperty("data.source");
-//        } catch (IOException e) {
-//            throw new UnsupportedOperationException("The problem with reading properties file named <" + propertiesFilename + ">. ", e);
-//        }
+        switch (connectionPoolName) {
+            case "HIKARI" -> connectionPoolManager = HikariConnectionPool.getInstance();
+            default -> throw new IllegalArgumentException("Can not create DAO factory " +
+                    "for \"" + connectionPoolName + "\", we don't have such connection handler. ");
+        }
 
-        return switch (sourceName) {
-            case "MYSQL" -> FactoryDaoMySQL.getInstance();
-            default -> throw new IllegalArgumentException("Can not create dao factory " +
-                    "for \"" + sourceName + "\", we don't have such database provided");
+        return switch (databaseName) {
+            case "MYSQL" -> FactoryDaoMySQL.getInstance(connectionPoolManager);
+            default -> throw new IllegalArgumentException("Can not create DAO factory " +
+                    "for \"" + databaseName + "\", we don't have such database. ");
         };
     }
+
+    void closeDao();
 
     RoomCategoryDao getRoomCategoryDao();
 

@@ -7,11 +7,11 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class HikariPooledConnectionBuilder implements ConnectionBuilder {
-    private static HikariPooledConnectionBuilder instance;
+public class HikariConnectionPool implements ConnectionPoolManager {
+    private static HikariConnectionPool instance;
     private static HikariDataSource dataSource;
 
-    private HikariPooledConnectionBuilder() {
+    private HikariConnectionPool() {
         if (dataSource == null) {
             String propertiesFilename = "hikari.properties";
             URL url = this.getClass()
@@ -27,11 +27,17 @@ public class HikariPooledConnectionBuilder implements ConnectionBuilder {
         }
     }
 
-    public static HikariPooledConnectionBuilder getInstance() {
+    public static HikariConnectionPool getInstance() {
         if (instance == null) {
-            instance = new HikariPooledConnectionBuilder();
+            instance = new HikariConnectionPool();
         }
         return instance;
+    }
+
+    @Override
+    public void closeDataSource() {
+        dataSource.close();
+        instance = null;
     }
 
     @Override

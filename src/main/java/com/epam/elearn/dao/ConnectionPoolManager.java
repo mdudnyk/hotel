@@ -2,7 +2,7 @@ package com.epam.elearn.dao;
 
 import java.sql.Connection;
 
-@FunctionalInterface
-public interface ConnectionBuilder {
+public interface ConnectionPoolManager {
     Connection getConnection() throws DBException;
+    void closeDataSource();
 }

@@ -1,22 +1,10 @@
 package com.epam.elearn.dao.mysql;
 
-import com.epam.elearn.dao.ConnectionBuilder;
-import com.epam.elearn.dao.HikariPooledConnectionBuilder;
 import com.epam.elearn.dao.DBException;
 
 import java.sql.*;
 
 class DBManagerMySQL {
-    private final ConnectionBuilder cb;
-
-    public DBManagerMySQL() {
-        cb = HikariPooledConnectionBuilder.getInstance();
-    }
-
-    public Connection getConnection() throws DBException {
-        return cb.getConnection();
-    }
-
     public PreparedStatement getPrepareStmt(Connection connection, String sqlQuery) throws DBException {
         PreparedStatement preparedStatement;
 
@@ -74,7 +62,7 @@ class DBManagerMySQL {
         try {
             connection.close();
         } catch (SQLException e) {
-            throw new DBException("Can not return/close connection", e);
+            throw new DBException("Can not return/close connection. ", e);
         }
     }
 }

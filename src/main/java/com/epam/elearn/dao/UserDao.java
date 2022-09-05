@@ -1,6 +1,6 @@
 package com.epam.elearn.dao;
 
-import com.epam.elearn.model.User;
+import com.epam.elearn.entity.User;
 
 public interface UserDao extends GeneralDao<User, Integer> {
     User getUserByEmail(String email) throws DBException;

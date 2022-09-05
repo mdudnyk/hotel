@@ -1,25 +1,28 @@
 package com.epam.elearn.dao.mysql;
 
+import com.epam.elearn.dao.ConnectionPoolManager;
 import com.epam.elearn.dao.UserDao;
-import com.epam.elearn.model.User;
+import com.epam.elearn.entity.User;
 import com.epam.elearn.dao.DBException;
-import com.epam.elearn.model.UserRoles;
+import com.epam.elearn.entity.UserRoles;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 class UserDaoImpl implements UserDao {
+    private final ConnectionPoolManager connectionPool;
     private final DBManagerMySQL dbManager;
+    private Connection connection;
 
-    public UserDaoImpl() {
+    public UserDaoImpl(ConnectionPoolManager connectionPoolManager) {
+        connectionPool = connectionPoolManager;
         dbManager = new DBManagerMySQL();
     }
 
     @Override
     public void create(final User entity) throws DBException {
-        Connection connection = dbManager.getConnection();
+        connection = connectionPool.getConnection();
 
         try (PreparedStatement ps = dbManager.getPrepareStmt(connection,
                 Queries.CREATE_USER, Statement.RETURN_GENERATED_KEYS)) {
@@ -40,7 +43,7 @@ class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAll() throws DBException {
-        Connection connection = dbManager.getConnection();
+        connection = connectionPool.getConnection();
         List<User> list = new ArrayList<>();
 
         try (ResultSet resultSet = dbManager.getResultSet(connection, Queries.GET_ALL_USERS)) {
@@ -57,7 +60,7 @@ class UserDaoImpl implements UserDao {
 
     @Override
     public User getEntityById(final Integer id) throws DBException {
-        Connection connection = dbManager.getConnection();
+        connection = connectionPool.getConnection();
         User user;
 
         try (ResultSet resultSet = dbManager.getResultSet(connection, Queries.GET_USER_BY_ID, id)) {
@@ -73,7 +76,7 @@ class UserDaoImpl implements UserDao {
 
     @Override
     public User getUserByEmail(final String email) throws DBException {
-        Connection connection = dbManager.getConnection();
+        connection = connectionPool.getConnection();
         User user;
 
         try (PreparedStatement pSt = connection.prepareStatement(Queries.GET_USER_BY_EMAIL)) {
@@ -92,7 +95,7 @@ class UserDaoImpl implements UserDao {
 
     @Override
     public boolean checkIfEmailExists(final String email) throws DBException {
-        Connection connection = dbManager.getConnection();
+        connection = connectionPool.getConnection();
         boolean isEmailExists = true;
 
         try (PreparedStatement pSt = connection.prepareStatement(Queries.CHECK_IF_EMAIL_EXISTS)) {
@@ -111,7 +114,7 @@ class UserDaoImpl implements UserDao {
 
     @Override
     public void update(final User entity) throws DBException {
-        Connection connection = dbManager.getConnection();
+        connection = connectionPool.getConnection();
 
         try (PreparedStatement ps = dbManager.getPrepareStmt(connection, Queries.UPDATE_USER)) {
             fillPreparedStatement(ps, entity);
@@ -126,7 +129,7 @@ class UserDaoImpl implements UserDao {
 
     @Override
     public void delete(final Integer id) throws DBException {
-        Connection connection = dbManager.getConnection();
+        connection = connectionPool.getConnection();
 
         try (PreparedStatement ps = dbManager.getPrepareStmt(connection, Queries.DELETE_USER)) {
 

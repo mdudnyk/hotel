@@ -2,8 +2,8 @@ package com.epam.elearn.controler.servlet.command.impl.post;
 
 import com.epam.elearn.controler.servlet.command.FrontCommand;
 import com.epam.elearn.dao.DBException;
-import com.epam.elearn.model.User;
-import com.epam.elearn.model.UserRoles;
+import com.epam.elearn.entity.User;
+import com.epam.elearn.entity.UserRoles;
 import com.epam.elearn.service.ServiceException;
 import com.epam.elearn.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;

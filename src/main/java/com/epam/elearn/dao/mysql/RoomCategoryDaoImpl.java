@@ -1,8 +1,9 @@
 package com.epam.elearn.dao.mysql;
 
+import com.epam.elearn.dao.ConnectionPoolManager;
 import com.epam.elearn.dao.DBException;
 import com.epam.elearn.dao.RoomCategoryDao;
-import com.epam.elearn.model.RoomCategory;
+import com.epam.elearn.entity.RoomCategory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,15 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 class RoomCategoryDaoImpl implements RoomCategoryDao {
+    private final ConnectionPoolManager connectionPool;
     private final DBManagerMySQL dbManager;
+    private Connection connection;
 
-    public RoomCategoryDaoImpl() {
+    public RoomCategoryDaoImpl(ConnectionPoolManager connectionPoolManager) {
+        connectionPool = connectionPoolManager;
         dbManager = new DBManagerMySQL();
     }
 
     @Override
     public void create(final RoomCategory entity) throws DBException {
-        Connection connection = dbManager.getConnection();
+        connection = connectionPool.getConnection();
 
         try (PreparedStatement ps = dbManager.getPrepareStmt(connection, Queries.CREATE_ROOM_CATEGORY)) {
             fillPreparedStatement(ps, entity);
@@ -34,7 +38,7 @@ class RoomCategoryDaoImpl implements RoomCategoryDao {
 
     @Override
     public List<RoomCategory> getAll() throws DBException {
-        Connection connection = dbManager.getConnection();
+        connection = connectionPool.getConnection();
         List<RoomCategory> list = new ArrayList<>();
 
         try (ResultSet resultSet = dbManager.getResultSet(connection, Queries.GET_ALL_ROOM_CATEGORY)) {
@@ -51,7 +55,7 @@ class RoomCategoryDaoImpl implements RoomCategoryDao {
 
     @Override
     public RoomCategory getEntityById(final Integer id) throws DBException {
-        Connection connection = dbManager.getConnection();
+        connection = connectionPool.getConnection();
         RoomCategory roomCategory;
 
         try (ResultSet resultSet = dbManager.getResultSet(connection, Queries.GET_ROOM_CATEGORY_BY_ID, id)) {
@@ -67,7 +71,7 @@ class RoomCategoryDaoImpl implements RoomCategoryDao {
 
     @Override
     public void update(final RoomCategory entity) throws DBException {
-        Connection connection = dbManager.getConnection();
+        connection = connectionPool.getConnection();
 
         try (PreparedStatement ps = dbManager.getPrepareStmt(connection, Queries.UPDATE_ROOM_CATEGORY)) {
 
@@ -86,7 +90,7 @@ class RoomCategoryDaoImpl implements RoomCategoryDao {
 
     @Override
     public void delete(final Integer id) throws DBException {
-        Connection connection = dbManager.getConnection();
+        connection = connectionPool.getConnection();
 
         try (PreparedStatement ps = dbManager.getPrepareStmt(connection, Queries.DELETE_ROOM_CATEGORY)) {
 
