@@ -42,7 +42,7 @@ class RoomCategoryDaoImpl implements RoomCategoryDao {
 
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(Queries.GET_ALL_ROOM_CATEGORY);
-             ResultSet rs = ps.getResultSet()) {
+             ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 list.add(fillEntityFromResultSet(rs));
             }

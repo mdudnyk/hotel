@@ -22,7 +22,7 @@
         <form action="controller" method="get">
             <div class="content__search-form">
                 <div class="content__hidden-form">
-                    <input type="hidden" name="cmd" value="ROOM_SEARCHER_PAGE" readonly />
+                    <input type="hidden" name="cmd" value="SHOW_AVAILABLE_ROOMS_FOR_DATES" readonly />
                 </div>
                 <div class="content__start-date">
                     <input type="text" class="content__start-date-field" name="startDate" placeholder="<fmt:message key="home.arriving"/>" required/>

@@ -52,4 +52,13 @@ public class Room implements Serializable {
     public int hashCode() {
         return Objects.hash(roomNumber, categoryId, currentStatus);
     }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "roomNumber=" + roomNumber +
+                ", categoryId=" + categoryId +
+                ", currentStatus=" + currentStatus +
+                '}';
+    }
 }

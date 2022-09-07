@@ -1,6 +1,8 @@
 package com.epam.elearn.entity;
 
 import java.io.Serializable;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 
 public class RoomCategory implements Serializable {
@@ -66,6 +68,10 @@ public class RoomCategory implements Serializable {
 
     public void setDescription(final String description) {
         this.description = description;
+    }
+
+    public static List<RoomCategory> sortByCapacity(List<RoomCategory> list) {
+        return list.stream().sorted(Comparator.comparingInt(RoomCategory::getGuestsCapacity)).toList();
     }
 
     @Override

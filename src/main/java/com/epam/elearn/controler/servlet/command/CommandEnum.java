@@ -3,7 +3,6 @@ package com.epam.elearn.controler.servlet.command;
 import com.epam.elearn.controler.servlet.command.impl.get.*;
 import com.epam.elearn.controler.servlet.command.impl.post.*;
 
-
 public enum CommandEnum {
 
     HOME_PAGE(new HomePageCommand()),
@@ -12,7 +11,7 @@ public enum CommandEnum {
     SIGN_UP(new SignUpCommand()),
     SIGN_IN(new SignInCommand()),
     SIGN_OUT(new SignOutCommand()),
-    ROOM_SEARCHER_PAGE(new RoomSearcherPageCommand()),
+    SHOW_AVAILABLE_ROOMS_FOR_DATES(new ShowAvailableRoomsForDatesCommand()),
     ERROR_PAGE(new ErrorPageCommand());
 
 

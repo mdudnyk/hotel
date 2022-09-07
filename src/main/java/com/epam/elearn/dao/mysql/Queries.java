@@ -36,6 +36,26 @@ class Queries {
     public static final String UPDATE_ROOM =    "UPDATE room SET values (room_number=?, category_id=?, current_status=?) " +
                                                 "WHERE room_number=?";
     public static final String DELETE_ROOM = "DELETE FROM room WHERE room_number=?";
+    public static final String GET_AVAILABLE_ROOMS_FOR_DATE_RANGE_AND_MIN_CAPACITY = """
+                                                    SELECT * FROM room
+                                                    WHERE
+                                                        (current_status='FREE' OR current_status<>'UNAVAILABLE')
+                                                        AND NOT EXISTS(
+                                                            SELECT booked_rooms.room_number FROM booked_rooms
+                                                            WHERE booked_rooms.room_number = room.room_number
+                                                                AND booking_id IN(
+                                                                    SELECT id FROM booking
+                                                                    WHERE NOT(DATE(check_in_date) < ?
+                                                                        AND DATE(check_out_date) <= ?
+                                                                        OR DATE(check_in_date) >= ?
+                                                                        AND DATE(check_out_date) > ?)
+                                                                )
+                                                        )
+                                                        AND category_id IN(
+                                                            SELECT id FROM category WHERE guests_capacity >= ?
+                                                        )
+                                                    ORDER BY category_id;
+                                                    """;
 
     //APPLICATION
     public static final String CREATE_APPLICATION = "INSERT INTO application values (DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
@@ -46,5 +66,4 @@ class Queries {
                                                     "booking_status=?, check_in_date=?, check_out_date=?, last_update=?) " +
                                                     "WHERE id=?";
     public static final String DELETE_APPLICATION = "DELETE FROM application WHERE id=?";
-
 }

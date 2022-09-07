@@ -4,9 +4,7 @@ import com.epam.elearn.dao.ApplicationDao;
 import com.epam.elearn.dao.ConnectionManager;
 import com.epam.elearn.dao.DBException;
 import com.epam.elearn.entity.Application;
-import com.epam.elearn.entity.Booking;
 import com.epam.elearn.entity.enums.ApplicationStatus;
-import com.epam.elearn.entity.enums.BookingStatus;
 
 import java.sql.*;
 import java.time.LocalDate;

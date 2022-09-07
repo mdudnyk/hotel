@@ -17,6 +17,7 @@
         <p>
             The start date is <%= request.getParameter("startDate") %>
             The end date is <%= request.getParameter("endDate") %>
+
         </p>
     </div>
 </div>

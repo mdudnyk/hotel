@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +46,31 @@ public class RoomDaoImpl implements RoomDao {
             }
         } catch (SQLException e) {
             throw new DBException("Error while trying to get rooms list from database. " + e);
+        }
+
+        return rooms;
+    }
+
+    @Override
+    public List<Room> getAvailableRoomsForDateRangeAndMinCapacity(final LocalDate checkInDate,
+                                                                  final LocalDate checkOutDate,
+                                                                  final int minGuests) throws DBException {
+        List<Room> rooms = new ArrayList<>();
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(Queries.GET_AVAILABLE_ROOMS_FOR_DATE_RANGE_AND_MIN_CAPACITY)) {
+            ps.setString(1, checkInDate.toString());
+            ps.setString(2, checkInDate.toString());
+            ps.setString(3, checkOutDate.toString());
+            ps.setString(4, checkOutDate.toString());
+            ps.setInt(5, minGuests);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                rooms.add(fillEntityFromResultSet(rs));
+            }
+        } catch (SQLException e) {
+            throw new DBException("Error while trying to get list of available rooms that filtered according to the " +
+                    "input date range and MIN guests capacity. " + e);
         }
 
         return rooms;
