@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApplicationDaoImpl implements ApplicationDao {
+class ApplicationDaoImpl implements ApplicationDao {
     private final ConnectionManager connectionPool;
 
     public ApplicationDaoImpl(ConnectionManager connectionManager) {

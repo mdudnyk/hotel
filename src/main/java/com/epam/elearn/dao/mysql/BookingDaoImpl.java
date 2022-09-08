@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookingDaoImpl implements BookingDao {
+class BookingDaoImpl implements BookingDao {
     private final ConnectionManager connectionPool;
 
     public BookingDaoImpl(ConnectionManager connectionManager) {

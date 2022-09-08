@@ -9,11 +9,12 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class RoomService {
-    public void roomTest(LocalDate arrivingDate, LocalDate leavingDate, List<Integer> guestsInRoom) throws DBException {
+    public LinkedHashMap<RoomCategory, Integer> roomTest(LocalDate arrivingDate, LocalDate leavingDate, List<Integer> guestsInRoom) throws DBException {
+        LinkedHashMap<RoomCategory, Integer> catAndRoomsAmount = new LinkedHashMap<>();
         FactoryDao dao = FactoryDao.create();
         int roomsRequired = guestsInRoom.size();
 
-        //TODO Incoming dates validation
+        //TODO Incoming data validation
 
         List<Room> suitableRooms = dao.getRoomDao().getAvailableRoomsForDateRangeAndMinCapacity(
                 arrivingDate,
@@ -25,14 +26,23 @@ public class RoomService {
             List<Room> tmpSelectedRooms = testRoomSelection(guestsInRoom, suitableRooms, sortedSuitableCategories);
 
             if (tmpSelectedRooms.size() == roomsRequired) {
+                for (RoomCategory roomCat : sortedSuitableCategories) {
+                    int roomsCountForCategory = 0;
+                    for (Room room : suitableRooms) {
+                        if (room.getCategoryId() == roomCat.getId()) {
+                            roomsCountForCategory++;
+                        }
+                    }
+                    catAndRoomsAmount.put(roomCat, roomsCountForCategory);
+                }
                 System.out.println("We are able to book such rooms amount with needed capacity for you.");
-                tmpSelectedRooms.forEach(System.out::println);
             } else {
                 System.out.println("We have no rooms available. Modify your stay parameters.");
             }
         } else {
             System.out.println("We have no rooms available. Modify your stay parameters.");
         }
+        return catAndRoomsAmount;
     }
 
     private List<Room> testRoomSelection(final List<Integer> guestsInRoom, final List<Room> suitableRooms,

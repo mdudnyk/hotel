@@ -1,0 +1,159 @@
+body {
+    background-image: linear-gradient(to left, rgba(255,255,255, 0.7) 90%, whitesmoke), url('../img/search-banner.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.content__datepicker_block {
+    position: fixed;
+    margin-top: 130px;
+    height: 75px;
+    width: 100%;
+
+    background-color: #3b719e;
+    box-shadow: 0 0 28px -8px rgba(0,0,0,0.5);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content__search-form {
+    display: flex;
+}
+
+.content__datepicker_block input {
+    height: 50px;
+    width: 250px;
+    margin: 5px;
+    padding: 0;
+    border-radius: 5px;
+
+    background-color: rgba(245, 245, 245, 0.1);
+    color:whitesmoke;
+
+    text-align: center;
+    font-weight: 300;
+    font-size: 15pt;
+    text-transform: none;
+    letter-spacing: .09em;
+
+    transition: ease-out 0.2s;
+}
+
+.content__datepicker_block input::placeholder {
+    color:rgba(245, 245, 245, 0.9);
+}
+
+.content__datepicker_block input:hover {
+    background-color: rgba(245, 245, 245, 0.9);
+    color:#3b719e;
+}
+
+.content__datepicker_block input:hover::placeholder {
+    color:#3b719e;
+}
+
+.content__datepicker_block button {
+    height: 50px;
+    width: 130px;
+    margin: 5px;
+    padding: 0;
+    border-radius: 5px;
+
+    background-color: rgba(245, 245, 245, 0.9);
+    color:#3b719e;
+
+    font-weight: 400;
+    font-size: 13pt;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+}
+
+.content__datepicker_block button:hover {
+    background-color: rgba(250, 250, 250, 1);
+    color:#3b719e;
+}
+
+@keyframes shake {
+    0% {
+        padding-left: 0;
+    }
+    50% {
+        padding-left: 1%;
+    }
+    100% {
+        padding-left: 0;
+    }
+}
+
+.categories_block {
+    position:absolute;
+    width: 100%;
+    margin-top: 230px;
+    padding-bottom: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.categories_block__row {
+    cursor: default;
+    height: 210px;
+    width: 1000px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+
+    background-color: rgba(245, 245, 245, 0.9);
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.2);
+
+    display: flex;
+}
+
+.image {
+    border-radius: 20px 0 0 20px;
+}
+
+.categories_block_def_module {
+    width: 250px;
+    margin-left: 25px;
+
+    font-weight: 300;
+    font-size: 13pt;
+    color: rgb(65, 65, 65);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#category_title_1 {
+    font-size: 20pt;
+}
+
+#category_title_2 {
+    margin-bottom: 10px;
+}
+
+#category_title_4 {
+    cursor: pointer;
+    font-weight: 500;
+    color: #3b719e;
+}
+
+#category_title_5 {
+    margin-top: -25px;
+    margin-bottom: -25px;
+    flex-basis: 10px;
+    font-size: 11pt;
+    font-weight: 400;
+    color: #cf4a4a;
+}
+
+#square_meter {
+    position: relative;
+    top: -6px;
+
+    font-size: 8pt;
+}

@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoomDaoImpl implements RoomDao {
+class RoomDaoImpl implements RoomDao {
     private final ConnectionManager connectionPool;
 
     public RoomDaoImpl(ConnectionManager connectionManager) {

@@ -2,6 +2,7 @@ package com.epam.elearn.controler.servlet.command.impl.get;
 
 import com.epam.elearn.controler.servlet.command.FrontCommand;
 import com.epam.elearn.dao.DBException;
+import com.epam.elearn.entity.RoomCategory;
 import com.epam.elearn.service.RoomService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,24 +12,21 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ShowAvailableRoomsForDatesCommand implements FrontCommand {
     @Override
     public void execute(final HttpServletRequest request, final HttpServletResponse response) throws DBException, IOException, ServletException {
-
         String arrivingDate = request.getParameter("startDate");
         String leavingDate = request.getParameter("endDate");
 
-        System.out.println("START DAY - " + arrivingDate);
-        System.out.println("END DAY - " + leavingDate);
 
         List<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(2);
         list.add(2);
 
+        Map<RoomCategory, Integer> result = new RoomService().roomTest(LocalDate.parse(arrivingDate), LocalDate.parse(leavingDate), list);
 
-        new RoomService().roomTest(LocalDate.parse(arrivingDate), LocalDate.parse(leavingDate), list);
+        request.setAttribute("map", result);
 
         request.getRequestDispatcher("WEB-INF/views/RoomSearcherPage.jsp").forward(request, response);
     }
