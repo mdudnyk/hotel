@@ -19,10 +19,14 @@ public class ShowAvailableRoomsForDatesCommand implements FrontCommand {
     public void execute(final HttpServletRequest request, final HttpServletResponse response) throws DBException, IOException, ServletException {
         String arrivingDate = request.getParameter("startDate");
         String leavingDate = request.getParameter("endDate");
-
+        String guestsInRooms = request.getParameter("guestsInRooms");
 
         List<Integer> list = new ArrayList<>();
-        list.add(2);
+
+        for (int i = 0; i < guestsInRooms.length(); i++) {
+            list.add(Integer.parseInt(String.valueOf(guestsInRooms.charAt(i))));
+        }
+        System.out.println(list);
 
         Map<RoomCategory, Integer> result = new RoomService().roomTest(LocalDate.parse(arrivingDate), LocalDate.parse(leavingDate), list);
 

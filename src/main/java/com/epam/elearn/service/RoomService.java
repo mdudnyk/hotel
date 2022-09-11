@@ -9,7 +9,9 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class RoomService {
-    public LinkedHashMap<RoomCategory, Integer> roomTest(LocalDate arrivingDate, LocalDate leavingDate, List<Integer> guestsInRoom) throws DBException {
+    public LinkedHashMap<RoomCategory, Integer> roomTest(LocalDate arrivingDate,
+                                                         LocalDate leavingDate,
+                                                         List<Integer> guestsInRoom) throws DBException {
         LinkedHashMap<RoomCategory, Integer> catAndRoomsAmount = new LinkedHashMap<>();
         FactoryDao dao = FactoryDao.create();
         int roomsRequired = guestsInRoom.size();

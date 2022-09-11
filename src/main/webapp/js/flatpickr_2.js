@@ -62,7 +62,6 @@ function changeStartDate() {
 const endDate = flatpickr(".content__end-date-field", config_end);
 
 
-
 const guests_field = document.getElementById('guests_filed');
 const guests_field_hidden = document.getElementById('guests_filed_hidden');
 const dropdown = document.getElementById('myDropdown');
@@ -72,7 +71,7 @@ const done_btn = document.getElementById('done_btn');
 const srch_btn = document.getElementById('srch_btn');
 
 let currentRoomsAmount = 0;
-let lastRoomNumber = 1;
+let lastRoomNumber = 0;
 let roomsArray = [];
 let guestsArray = [];
 
@@ -90,16 +89,18 @@ function actualize_guests_filed () {
 
 guests_field.onclick = function() {
     dropdown.style.display = "block";
-    if (currentRoomsAmount === 0) {
-        createRoomRow(currentRoomsAmount++);
-    }
 }
 
 done_btn.onclick = function() {
     dropdown.style.display = "none";
 }
 
-add_btn.onclick = function() {
+add_btn.onclick = function () {
+    add_new_room_row();
+    actualize_guests_filed();
+}
+
+function add_new_room_row() {
     if (lastRoomNumber < 6) {
         lastRoomNumber++;
         createRoomRow(currentRoomsAmount++);
@@ -155,7 +156,6 @@ function createRoomRow(number) {
     room_content.appendChild(div);
     roomsArray[number] = div;
     guestsArray[number] = 1;
-    actualize_guests_filed();
 }
 
 function plus_onclick(number, digit, minus, plus) {
@@ -214,20 +214,18 @@ document.onreadystatechange = function() {
     }
 }
 
+
 function activateRoomFromRequest() {
     const guestsInRooms = getGuestsInRoomsParameterFromRequest();
-
     const array = Array.from(guestsInRooms);
-    console.log(array);
 
     for (let i = 0; i < array.length; i++) {
-        createRoomRow(currentRoomsAmount++);
+        add_new_room_row();
         const plus_button = document.getElementById('plus_sign_' + i);
         for (let j = 1; j < array[i]; j++) {
             plus_button.click();
         }
     }
-
     actualize_guests_filed();
 }
 
