@@ -5,6 +5,7 @@ body {
 }
 
 .content__datepicker_block {
+    z-index: 1;
     position: fixed;
     margin-top: 130px;
     height: 75px;
@@ -87,6 +88,233 @@ body {
     }
 }
 
+/* guests manager dropdown */
+
+.dropdown-content {
+    cursor: default;
+    border-radius: 3px;
+    margin-left: 10px;
+    display: none;
+    position: absolute;
+    background-color: white;
+    width: 240px;
+    max-height: 390px;
+    overflow: auto;
+    box-shadow: 0 5px 8px 0 rgba(0,0,0,0.1);
+    z-index: 1;
+    color: #444;
+}
+
+#wrapper {
+    font-size: 12pt;
+    display: flex;
+    flex-direction: column;
+}
+
+#room_header {
+    background-color: rgb(240, 240, 240);
+    display: flex;
+    height: 40px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 6px;
+}
+
+#room_number {
+    display: block;
+    font-size: 10pt;
+}
+
+.close {
+    position: inherit !important;
+    padding: 0;
+    margin: 0;
+    border-radius: 11px !important;
+    font-size: 8pt !important;
+    width: 22px !important;
+    height: 22px !important;
+    color: #858585 !important;
+    background-color: #e4e4e4 !important;
+
+}
+
+.close:hover {
+    color: whitesmoke !important;
+    background-color: #b9b9b9 !important;
+}
+
+
+#room_selector {
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#btn_content {
+    position: sticky;
+    bottom: 0;
+    padding-right: 4px;
+    background-color: #f0f0f0;
+    border-top: solid rgb(209, 209, 209) 1px;
+    display: flex;
+    justify-content: right;
+}
+
+#amount_changer {
+    display: flex;
+    width: 80px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.plus, .minus {
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: -0.5px 2px 3px 0 rgba(0,0,0,0.4);
+    color: whitesmoke !important;
+    border-radius: 10px !important;
+    font-size: 11pt !important;
+    width: 20px !important;
+    height: 20px !important;
+    background-color: #3b719e !important;
+}
+
+.plus:hover, .minus:hover {
+    background-color: #3b719edc !important;
+}
+
+#add_room_btn, #done_btn {
+    width: 90px;
+    font-weight: 600;
+    font-size: 10pt;
+    height: 35px;
+    letter-spacing: 0.03em;
+}
+
+#add_room_btn {
+    background-color: transparent;
+}
+
+#add_room_btn:hover {
+    background-color: #3b719e1a;
+}
+
+#done_btn {
+    color: whitesmoke;
+    background-color: #3b719e;
+}
+
+#done_btn:hover {
+    background-color: #3b719edc;
+}
+
+
+/*.dropdown-content {*/
+/*    cursor: default;*/
+/*    border-radius: 3px;*/
+/*    margin-left: 10px;*/
+/*    display: none;*/
+/*    position: absolute;*/
+/*    background-color: white;*/
+/*    width: 240px;*/
+/*    max-height: 390px;*/
+/*    overflow: auto;*/
+/*    box-shadow: 0 5px 8px 0 rgba(0,0,0,0.1);*/
+/*    z-index: 1;*/
+/*    color: #444;*/
+/*}*/
+
+/*.show {display: block;}*/
+
+/*#wrapper {*/
+/*    font-size: 12pt;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+
+/*#room_number {*/
+/*    font-size: 10pt;*/
+/*    padding: 15px;*/
+/*    background-color: rgb(240, 240, 240);*/
+/*}*/
+
+/*#room_selector {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    height: 70px;*/
+/*    align-items: center;*/
+/*    padding-left: 20px;*/
+/*    padding-right: 20px;*/
+/*}*/
+
+/*#btn_content {*/
+/*    position: sticky;*/
+/*    bottom: 0;*/
+/*    padding-right: 4px;*/
+/*    background-color: #f0f0f0;*/
+/*    border-top: solid rgb(209, 209, 209) 1px;*/
+/*    display: flex;*/
+/*    justify-content: right;*/
+/*}*/
+
+/*#amount_changer {*/
+/*    display: flex;*/
+/*    width: 80px;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*}*/
+
+/*#plus_sign, #minus_sign {*/
+/*    box-shadow: -0.5px 2px 3px 0 rgba(0,0,0,0.4);*/
+/*    display: flex;*/
+/*    color: whitesmoke;*/
+/*    border-radius: 10px;*/
+/*    width: 20px;*/
+/*    height: 20px;*/
+/*    background-color: #3b719e;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+
+/*#plus_sign:hover, #minus_sign:hover {*/
+/*    background-color: #3b719edc;*/
+/*}*/
+
+/*#btn_content button {*/
+/*    width: 90px;*/
+/*    font-weight: 600;*/
+/*    font-size: 10pt;*/
+/*    height: 35px;*/
+/*    letter-spacing: 0.03em;*/
+/*}*/
+
+/*#add_room_btn {*/
+/*    background-color: transparent;*/
+/*}*/
+
+/*#add_room_btn:hover {*/
+/*    background-color: #3b719e1a;*/
+/*}*/
+
+/*#done_btn {*/
+/*    color: whitesmoke;*/
+/*    background-color: #3b719e;*/
+/*}*/
+
+/*#done_btn:hover {*/
+/*    background-color: #3b719edc;*/
+/*}*/
+
+
+
+
+
+
 .categories_block {
     position:absolute;
     width: 100%;
@@ -154,6 +382,7 @@ body {
 #square_meter {
     position: relative;
     top: -6px;
-
     font-size: 8pt;
 }
+
+

@@ -1,6 +1,6 @@
 <%@ page import="com.epam.elearn.entity.RoomCategory" %>
 <%@ page import="java.util.Map" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <html lang="ua">
 <head>
@@ -29,10 +29,24 @@
                 <input type="text" class="content__end-date-field" name="endDate" placeholder="Leaving Date" required/>
             </div>
             <div class="content__rooms-guests">
-                <input type="text" class="content__rooms-guests-field" name="guestsInRooms" placeholder="Guests amount" required/>
+                <input type="text" id="guests_filed" class="content__rooms-guests-field"  placeholder="Guests amount" readonly/>
+                <div id="myDropdown" class="dropdown-content">
+                    <div id="wrapper">
+                        <div id="room_content">
+                            <!-- room rows inserted from javascript -->
+                        </div>
+                        <div id="btn_content">
+                            <button id="add_room_btn" type="button">Add room</button>
+                            <button id="done_btn" type="button">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="guests_filed_hidden">
+                <input type="hidden" id="guests_filed_hidden" name="guestsInRooms" readonly />
             </div>
             <div class="content__search">
-                <button class="content__search-button" type="submit">Search</button>
+                <button id="srch_btn" class="content__search-button" type="button">Search</button>
             </div>
         </div>
     </form>

@@ -27,8 +27,11 @@
                 <div class="content__start-date">
                     <input type="text" class="content__start-date-field" name="startDate" placeholder="<fmt:message key="home.arriving"/>" required/>
                 </div>                        <div class="content__end-date">
-                <input type="text" class="content__end-date-field" name="endDate" placeholder="<fmt:message key="home.leaving"/>" required/>
-            </div>
+                    <input type="text" class="content__end-date-field" name="endDate" placeholder="<fmt:message key="home.leaving"/>" required/>
+                </div>
+                <div>
+                    <input type="hidden" name="guestsInRooms" value="2" readonly/>
+                </div>
                 <div class="content__search">
                     <button class="content__search-button" type="submit"> <fmt:message key="home.search"/> </button>
                 </div>
