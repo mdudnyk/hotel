@@ -14,23 +14,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 public class ShowAvailableRoomsForDatesCommand implements FrontCommand {
     @Override
-    public void execute(final HttpServletRequest request, final HttpServletResponse response) throws DBException, IOException, ServletException {
+    public void execute(final HttpServletRequest request, final HttpServletResponse response)
+            throws DBException, IOException, ServletException {
         String arrivingDate = request.getParameter("startDate");
         String leavingDate = request.getParameter("endDate");
         String guestsInRooms = request.getParameter("guestsInRooms");
 
-        List<Integer> list = new ArrayList<>();
+        if (arrivingDate != null && leavingDate != null && guestsInRooms != null) {
+            List<Integer> guestsList = new ArrayList<>();
 
-        for (int i = 0; i < guestsInRooms.length(); i++) {
-            list.add(Integer.parseInt(String.valueOf(guestsInRooms.charAt(i))));
+            for (int i = 0; i < guestsInRooms.length(); i++) {
+                guestsList.add(Integer.parseInt(String.valueOf(guestsInRooms.charAt(i))));
+            }
+
+            LocalDate arrivingOn = LocalDate.parse(arrivingDate);
+            LocalDate leavingOn = LocalDate.parse(leavingDate);
+
+            Map<RoomCategory, Integer> result = new RoomService().roomTest(arrivingOn, leavingOn, guestsList);
+            request.setAttribute("map", result);
+
+            long nights = DAYS.between(arrivingOn, leavingOn);
+            request.setAttribute("nights", nights);
         }
-        System.out.println(list);
-
-        Map<RoomCategory, Integer> result = new RoomService().roomTest(LocalDate.parse(arrivingDate), LocalDate.parse(leavingDate), list);
-
-        request.setAttribute("map", result);
 
         request.getRequestDispatcher("WEB-INF/views/RoomSearcherPage.jsp").forward(request, response);
     }

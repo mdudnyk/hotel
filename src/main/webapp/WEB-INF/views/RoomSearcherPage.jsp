@@ -72,6 +72,7 @@
                             out.print("Only " + rooms + " rooms available!");
                         }
                     }
+                    long nights = (long) request.getAttribute("nights");
                 %>
             </span>
             <div>
@@ -79,6 +80,15 @@
                 <p id="category_title_3">Max persons: <%=category.getGuestsCapacity()%></p>
             </div>
             <span id="category_title_4">Read more</span>
+        </div>
+        <div class="categories_book_module">
+            <div id="price"><%=category.getPriceDefault() * nights%> UAH</div>
+            <div id="price_details">
+                <%=
+                   nights
+                %>
+                night<%=nights > 1 ? "s" : ""%>, 1 room</div>
+            <button id="book_btn">Select</button>
         </div>
     </div>
     <%

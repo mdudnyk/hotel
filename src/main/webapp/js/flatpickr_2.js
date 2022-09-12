@@ -84,15 +84,19 @@ function actualize_guests_filed () {
             rooms_total++;
         }
     }
-    guests_field.value = guests_total + ' guests, ' + rooms_total + ' rooms';
+    guests_field.value = guests_total + ' guests, ' + rooms_total + ' room' + (rooms_total > 1 ? 's' : '');
 }
 
 guests_field.onclick = function() {
-    dropdown.style.display = "block";
+    if (dropdown.style.display === "none") {
+        dropdown.style.display = "block";
+    } else {
+        dropdown.style.display = "none";
+    }
 }
 
 done_btn.onclick = function() {
-    dropdown.style.display = "none";
+    srch_btn.click();
 }
 
 add_btn.onclick = function () {
@@ -210,10 +214,10 @@ function close_onclick(number) {
 
 document.onreadystatechange = function() {
     if (document.readyState === "complete") {
+        dropdown.style.display = "none"
         activateRoomFromRequest();
     }
 }
-
 
 function activateRoomFromRequest() {
     const guestsInRooms = getGuestsInRoomsParameterFromRequest();
