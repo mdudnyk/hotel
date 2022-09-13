@@ -30,6 +30,7 @@ public class ShowAvailableRoomsForDatesCommand implements FrontCommand {
             for (int i = 0; i < guestsInRooms.length(); i++) {
                 guestsList.add(Integer.parseInt(String.valueOf(guestsInRooms.charAt(i))));
             }
+            request.setAttribute("rooms", guestsList.size());
 
             LocalDate arrivingOn = LocalDate.parse(arrivingDate);
             LocalDate leavingOn = LocalDate.parse(leavingDate);

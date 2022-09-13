@@ -19,13 +19,6 @@ function getStartDateFromRequest() {
 function changeEndDate() {
     let date = new Date(startDate.selectedDates[0]);
     endDate.config.minDate = date.fp_incr(1);
-
-    if (endDate.selectedDates.length === 0) {
-        endDate.jumpToDate(date, true);
-        endDate.open();
-    } else {
-        search_button.type = "submit";
-    }
 }
 
 const startDate = flatpickr(".content__start-date-field", config_start);
@@ -51,12 +44,6 @@ function getEndDateFromRequest() {
 function changeStartDate() {
     let date = new Date(endDate.selectedDates);
     startDate.config.maxDate = date.fp_incr(-1);
-
-    if (startDate.selectedDates.length === 0) {
-        startDate.open();
-    } else {
-        search_button.type = "submit";
-    }
 }
 
 const endDate = flatpickr(".content__end-date-field", config_end);

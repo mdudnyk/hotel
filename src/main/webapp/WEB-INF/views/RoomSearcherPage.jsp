@@ -52,49 +52,73 @@
     </form>
 </div>
 
-<div class="categories_block">
+<div class="content__categories_booking_block">
     <%
-        Map<RoomCategory, Integer> map = (Map<RoomCategory, Integer>) request.getAttribute("map");
-        if (map != null && map.size() != 0) {
-            for(RoomCategory category: map.keySet()) {
+        Map<RoomCategory, Integer> categoriesMap = (Map<RoomCategory, Integer>) request.getAttribute("map");
+        int roomsCountInOrder = (int) request.getAttribute("rooms");
+        if (categoriesMap != null && categoriesMap.size() != 0) {
     %>
-    <div class="categories_block__row">
-        <img src="img/rooms_images/double_room.jpg" class="image" alt="Double room" height="210px">
-        <div class="categories_block_def_module">
-            <span id="category_title_1"> <%=category.getTitle()%> </span>
-            <span id="category_title_5">
-                <%
-                    int rooms = map.get(category);
-                    if (rooms <= 3) {
-                        if (rooms == 1) {
-                            out.print("Only 1 room available!");
-                        } else {
-                            out.print("Only " + rooms + " rooms available!");
+    <div class="categories_block">
+        <%
+            for(RoomCategory category: categoriesMap.keySet()) {
+        %>
+        <div class="categories_block__row">
+            <img src="img/rooms_images/double_room.jpg" class="image" alt="Double room" height="210px">
+            <div class="categories_block_def_module">
+                <span id="category_title_1"> <%=category.getTitle()%> </span>
+                <span id="category_title_5">
+                    <%
+                       int rooms = categoriesMap.get(category);
+                        if (rooms <= 3) {
+                            if (rooms == 1) {
+                                out.print("The last room available!");
+                            } else {
+                                out.print("Only " + rooms + " rooms available!");
+                            }
                         }
-                    }
-                    long nights = (long) request.getAttribute("nights");
-                %>
-            </span>
-            <div>
-                <p id="category_title_2">Area: <%=category.getArea()%> m<span id="square_meter">2</span></p>
-                <p id="category_title_3">Max persons: <%=category.getGuestsCapacity()%></p>
+                        long nights = (long) request.getAttribute("nights");
+
+                    %>
+                </span>
+                <div>
+                    <p id="category_title_2">Area: <%=category.getArea()%> m<span id="square_meter">2</span></p>
+                    <p id="category_title_3">Max persons: <%=category.getGuestsCapacity()%></p>
+                </div>
+                <span id="category_title_4">Read more</span>
             </div>
-            <span id="category_title_4">Read more</span>
+            <div class="categories_select_module">
+                <div id="price"><%=category.getPriceDefault() * nights%> UAH</div>
+                <div id="price_details">
+                    <%=nights%> night<%=nights > 1 ? "s" : ""%>, 1 room</div>
+                <button id="select_btn">Select</button>
+            </div>
         </div>
-        <div class="categories_book_module">
-            <div id="price"><%=category.getPriceDefault() * nights%> UAH</div>
-            <div id="price_details">
-                <%=
-                   nights
-                %>
-                night<%=nights > 1 ? "s" : ""%>, 1 room</div>
-            <button id="book_btn">Select</button>
+        <%
+                }
+        %>
+    </div>
+    <div class="booking_block">
+        <div class="booking_block__top">
+            <div id="selected_rooms">Selected rooms <span>0</span>/<%=roomsCountInOrder%></div>
+        </div>
+        <div class="booking_block__middle">
+            <div id="total_price">Total cost: <span>0</span> UAH</div>
+        </div>
+        <div class="booking_block__bottom">
+            <button id="book_btn">Book Now</button>
         </div>
     </div>
-    <%
+        <%
+            } else {
+        %>
+    <div class="change_your_search">
+        <span>We don`t have available rooms for this dates</span>
+        <br>
+        <span id="please_change_options">Please change your stay options</span>
+    </div>
+        <%
             }
-        }
-    %>
+        %>
 </div>
 
 <%@ include file="fragments/Footer.jspf" %>

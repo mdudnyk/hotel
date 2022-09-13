@@ -214,15 +214,22 @@ body {
 }
 
 
-.categories_block {
-    position:absolute;
-    width: 100%;
+
+.content__categories_booking_block {
+    position: absolute;
     margin-top: 230px;
-    padding-bottom: 30px;
+    width: 100%;
 
     display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.categories_block {
+    padding-bottom: 30px;
+    margin-left: 60px;
+    display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .categories_block__row {
@@ -285,7 +292,7 @@ body {
     font-size: 8pt;
 }
 
-.categories_book_module {
+.categories_select_module {
     width: 200px;
     display: flex;
     flex-direction: column;
@@ -316,7 +323,7 @@ body {
     color: rgb(97, 97, 97);
 }
 
-#book_btn {
+#select_btn {
     bottom: 0;
     width: 100px;
     height: 40px;
@@ -329,6 +336,85 @@ body {
     background-color: #3b719e;
 }
 
-#book_btn:hover {
+#select_btn:hover {
     background-color: #759ec0;
+}
+
+.booking_block {
+    cursor: default;
+    box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    background-color: #90b6d4;
+    margin-left: 40px;
+    width: 250px;
+    height: 210px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.booking_block__top {
+    background-color: #3b719e;
+    height: 50px;
+    border-radius: 20px 20px 0 0;
+    text-align: center;
+    padding-top: 15px;
+    font-size: 16pt;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+}
+
+.booking_block__bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 20px 20px;
+    height: 65px;
+    background-color: #b8cddd;
+}
+
+#book_btn {
+    margin-left: 10px;
+    bottom: 0;
+    height: 40px;
+    border-radius: 10px;
+    text-transform: capitalize;
+    font-size: 12pt;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: whitesmoke;
+    background-color:  #faab2b;
+}
+
+#book_btn:hover {
+    background-color: #ffb744;
+}
+
+#total_price {
+    text-align: center;
+    font-size: 16pt;
+}
+
+.change_your_search {
+    margin-top: 150px;
+    background-color: whitesmoke;
+    padding: 50px;
+    width: 800px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 25pt;
+    color: #759ec0;
+    font-weight: 300;
+    box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.1);
+
+}
+
+#please_change_options {
+    text-shadow: 1px 1px 5px #b9b9b9b0;
+    font-size: 20pt;
+    letter-spacing: 0.07em;
+    font-weight: 200;
+    display: block;
+    padding-top: 25px;
 }
